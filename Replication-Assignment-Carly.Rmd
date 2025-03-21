@@ -9,22 +9,114 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Loading Required Packages
+```{r}
+library(ggplot2)
+library(dplyr)
+library(datasets)
+library(RColorBrewer)
+library(ggplot2)
+library(tibble)
+library(ggpubr)
+library(gridExtra)
+library(FSA)
+library(ggthemes)
+if (!require("gplots", quietly = TRUE)) {
+  install.packages("gplots", dependencies = TRUE)
+}
+library(gplots)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+if (!require("RColorBrewer", quietly = TRUE)) {
+  install.packages("RColorBrewer", dependencies = TRUE)
+}
+library(RColorBrewer)
+library (dendextend)
+library(grid)
+library(gtable)
+library(ggprism)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+Special Case for "gganimate"
+```{r}
+# in order to install this final package, it's dependent on already having the packages "ggplot2", "gifski", and "transformr" installed (do this first)
+install.packages(c("ggplot2", "gifski", "transformr"))
+install.packages(gganimate)
+library(gganimate)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Data Time: 
+
+Loading CSV File Used for Figure 1C: 
+Summary of file INI_ave_see_99_05.csv
+- contains all INIs(inter-note-intervals) averaged by song collected from 1999 to 2005 at the SE location of the ONA region (Figure 1C in paper). Column headers listed below:
+
+-  "date"-  day of the analysed song
+-  "Ave_INI"-averaged INIs by song and day
+-  "SD_INI"- standard deviation for INIs by song and day
+-  "Ave_PF"- averaged peak frequencies of  20-Hz notes by song and day
+-  "SD_PF"-standard deviation of peak frequencies of 20-Hz notes by song and day
+-  "Num_INI"-number of INIs measured
+
+```{r}
+bout9905<-read.csv(file="~/Desktop/DATA/INI_ave_SE_99_05.csv", header=TRUE, dec=".")
+bout9905$date <- as.Date(bout9905$date, format = "%d/%m/%Y")
+str(bout9905$date)  # ensuring we now have the date format
+head(bout9905$date)
+```
+
+```{r}
+ini_b_9905 <- ggplot(bout9905, aes(x = date, y = Ave_INI)) +
+  geom_point(size=2, aes(group=1), color="darkblue")+
+  geom_errorbar(aes(ymin=Ave_INI-SD_INI, ymax=Ave_INI+SD_INI),width=2, color="darkblue") +
+  scale_y_continuous(name = "Average song INI (s)",
+                     limits=c(9, 20), guide = guide_prism_minor()) + theme_bw() +  
+  scale_x_date(breaks="6 month", date_labels="%b %y")+
+  theme(plot.title = element_text(size = 18, family = "Times", face = "bold"),
+        text=element_text(family = "Times"),panel.grid.major.y = element_line(colour="black", linetype=2), 
+        panel.grid.minor = element_blank(), panel.grid.major.x = element_line(colour="black", linetype=2), strip.text.x = element_text(size = 18, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
+        strip.background = element_rect(fill="grey97"),
+        axis.title = element_text(face="bold", size = 28),
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(colour="black", size = 28, vjust=0.5, angle=90),
+        axis.text.y = element_text(colour="black", size = 28), legend.position = "top", 
+        legend.text=element_text(size=22), legend.title=element_blank())
+print(ini_b_9905)
+```
+# Figure 1B (Running into an error) [#Fig. 1B ]INI percentage song type in SE location from the ONA region]
+```{r}
+perc_SE<-read.csv(file="~/Desktop/DATA/Perc_SE_songs.csv", header=TRUE, dec=".")
+str(perc_SE)
+perc_SE$INI <- factor(perc_SE$INI, levels = c("19s", "Hyb", "12s"))
+
+# "Make sure perc and Rythm are in the correct format" - but this is wrong (Ry)
+perc_SE$perc <- as.numeric(perc_SE$perc)
+perc_SE$INI <- factor(perc_SE$INI) #no column in the file that has rhythm in it - changed original rythm to INI?
+
+perc<-ggplot(perc_SE, aes(fill=INI, y=perc, x=year)) +
+  geom_bar(position="fill", stat="identity", width=0.5) +
+  scale_y_continuous(name = "INI type (%)",labels = scales::percent_format())+
+  theme_bw() +
+  theme(text=element_text(family = "Times"),panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        strip.text.x = element_text(size = 12, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
+        strip.background = element_rect(fill="grey97"),
+        axis.title = element_text(face="bold", size = 20),
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(colour="black", size = 20, angle=60, vjust = 0.5, hjust=0.5),
+        axis.text.y = element_text(colour="black", size = 20), legend.position = "top", 
+        legend.text=element_text(size=20), legend.title=element_blank()) +
+  scale_fill_manual(values=c("red","cyan", "springgreen4")) +
+#adding annotation for dashed line in 2001/2002 column
+  geom_segment(aes(x = which(perc_SE$year == "2001/2002")[1], 
+                   xend = which(perc_SE$year == "2001/2002")[1], 
+                   y = 0.01, yend = 0.99), 
+               linetype = "dashed", color = "black", linewidth = 1.5) +
+
+#adding annotation for "No Data" (attempting to center it)
+  annotate("text", x = which(perc_SE$year == "2001/2002")[1], y = 0.5, 
+           label = "No Data", family = "Times", angle = 90, vjust = -0.5, hjust = .5, size = 6)
+print(perc)
+```
+#comments regarding figure 1b:
+- Researchers tried to run this model using a column title called "perc_SEdollarsignRythm", which does not exist and is not found anywhere else in the above code. I renamed this to the column "perc_SEdollarsignINI", which still properly mirrors the 1B figure in the original paper. I believe this was just a naming mishap that could have arisen from their end 
+
