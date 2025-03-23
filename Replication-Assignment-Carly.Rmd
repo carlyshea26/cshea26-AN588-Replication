@@ -44,6 +44,9 @@ install.packages(gganimate)
 library(gganimate)
 ```
 
+**R was not used to generate figure 1A for the paper, so I am inserting it here**
+![Figure 1A] 
+
 Data Time: 
 
 Loading CSV File Used for Figure 1C: 
@@ -119,4 +122,159 @@ print(perc)
 ```
 #comments regarding figure 1b:
 - Researchers tried to run this model using a column title called "perc_SEdollarsignRythm", which does not exist and is not found anywhere else in the above code. I renamed this to the column "perc_SEdollarsignINI", which still properly mirrors the 1B figure in the original paper. I believe this was just a naming mishap that could have arisen from their end 
+
+
+#Figure 3:
+```{r}
+bout0620<-read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
+
+bout0620$date <-as.Date(bout0620$date, format = "%d/%m/%Y")
+
+ini_b_0620 <- ggplot(bout0620, aes(x = date, y = Ave_INI, color= Region)) +
+  geom_point(size=2, aes(group=1))+
+  geom_errorbar(aes(ymin=Ave_INI-SD_INI, ymax=Ave_INI+SD_INI),width=30) +
+  scale_y_continuous(name = "Average song INI (s)",
+                     limits=c(7.8, 21.5), guide = guide_prism_minor()) + 
+  theme_bw() +  
+  scale_x_date (breaks="1 year", date_labels="%Y")+
+  theme(plot.title = element_text(size = 18, family = "Times", face = "bold"),
+        text=element_text(family = "Times"),panel.grid.major.y = element_line(colour="black", linetype=2), 
+        panel.grid.minor = element_blank(),panel.grid.major.x = element_line(colour="black", linetype=2),
+        strip.text.x = element_text(size = 18, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
+        strip.background = element_rect(fill="grey97"),
+        axis.title.y = element_text(colour="black", size = 20, face="bold"),
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(colour="black", size = 20, vjust=0.5, angle=90),
+        axis.text.y = element_text(colour="black", size = 20), legend.position = "top", 
+        legend.text=element_text(size=22), legend.title=element_blank()) +
+  scale_color_manual(values=c("darkviolet","darkorange","green4", "black","turquoise","darkblue","red" )) +
+  #facet_grid(~year3, scale="free_x")
+  stat_smooth( method = "glm",aes(group=1), colour = "black", fill= "grey", size=0.5)
+
+print(ini_b_0620)
+```
+
+```{r}
+#Fig. 3B: Gradient of the peak frequency of the 20Hz only for EAR data
+EARs<-subset(bout0620, Location=="Azores" | Location=="Gorringe")
+
+EARs<-read.csv(file="~/Desktop/DATA/20Hz_ave_EARs.csv", header=TRUE, dec=".")
+
+EARs$date <-as.Date(EARs$date, format = "%d/%m/%Y")
+freq20_b_EAR <- ggplot(EARs, aes(x = date, y = Ave_PF, color= Region)) +
+  geom_point(size=2, aes(group=1))+
+  geom_errorbar(aes(ymin=Ave_PF-SD_PF, ymax=Ave_PF+SD_PF),width=30) +
+  scale_y_continuous(name = "20-Hz note peak frequency (Hz)",
+                     limits=c(18, 25)) + 
+  theme_bw() +  
+  scale_x_date (breaks="1 year", date_labels="%Y")+
+  theme(plot.title = element_text(size = 18, family = "Times", face = "bold"),
+        text=element_text(family = "Times"),panel.grid.major.y = element_line(colour="black", linetype=2), 
+        panel.grid.minor = element_blank(),panel.grid.major.x = element_line(colour="black", linetype=2),
+        strip.text.x = element_text(size = 18, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
+        strip.background = element_rect(fill="grey97"),
+        axis.title = element_text(face="bold", size = 28),
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(colour="black", size = 28, vjust=0.5, angle=90),
+        axis.text.y = element_text(colour="black", size = 28), legend.position = "top", 
+        legend.text=element_text(size=16), legend.title=element_blank()) +
+  scale_color_manual(values=c("red", "darkblue")) +
+  stat_smooth(method = "glm",aes(group=1), colour = "black", fill= "grey", size=0.5)
+print(freq20_b_EAR)
+```
+#FIGURE 3C:
+```{r}
+HF<-read.csv(file="~/Desktop/DATA/HF_ave.csv", header=TRUE, dec=".")
+
+HF$date <-as.Date(HF$date, format = "%d/%m/%Y")
+
+HF_b <- ggplot(HF, aes(x = date, y = Ave_PF, color= Region)) +
+  geom_point(size=2, aes(group=1))+
+  geom_errorbar(aes(ymin=Ave_PF-SD_PF, ymax=Ave_PF+SD_PF),width=30) +
+  scale_y_continuous(name = "HF note peak frequency (Hz)",
+                     limits=c(122, 138)) + 
+  theme_bw() +  
+  scale_x_date(breaks="1 year", date_labels="%Y") +
+  theme(plot.title = element_text(size = 18, family = "Times", face = "bold"),
+        text=element_text(family = "Times"),panel.grid.major.y = element_line(colour="black", linetype=2),
+        panel.grid.minor = element_blank(),panel.grid.major.x = element_line(colour="black", linetype=2),
+        strip.text.x = element_text(size = 18, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
+        strip.background = element_rect(fill="grey97"),
+        axis.title = element_text(face="bold", size = 28),
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(colour="black", size = 28, vjust=0.5, angle=90),
+        axis.text.y = element_text(colour="black", size = 28), legend.position = "top", 
+        legend.text=element_text(size=16), legend.title=element_blank()) +
+  scale_color_manual(values=c("darkviolet", "red", "green4","black","turquoise", "blue")) +
+  #facet_grid(~year2, scale="free_x") 
+  stat_smooth(method = "glm",aes(group=1), colour = "black", fill= "grey", lwd=0.5)
+HF_b
+```
+
+
+```{r}
+#LINEAR MODELS 
+##INIs========================================================================================
+INI_lm<-read.csv(file="INI_ave_06_20.csv", header=TRUE, dec=".")
+LM_ini<-lm(Ave_INI ~ year, data=INI_lm)
+summary(LM_ini)
+
+# Model validation figures - Figure 3 - figure supplement 1
+layout(matrix(c(1,2,3),3,3,3,byrow=T))
+par(mfrow = c(3, 3))
+#Spend x Residuals Plot
+plot(LM_ini$resid~INI_lm$Ave_INI[order(INI_lm$Ave_INI)],
+     main="Internote intervals(INIs)x Residuals\nfor Simple Regression",
+     xlab="INIs", ylab="Residuals")
+abline(h=0,lty=2)
+
+#Histogram of Residuals
+hist(LM_ini$resid, main="Histogram of Residuals", xlab="Residuals",
+     ylab="Observations")
+
+#Q-Q Plot
+qqnorm(LM_ini$resid)
+qqline(LM_ini$resid)
+
+## Peak frequencies of the 20-Hz notes from EAR data ==================================================================
+EAR<-read.csv(file="20Hz_ave_EARs.csv", header=TRUE, dec=".")
+LM_20_EAR<-lm(Ave_PF ~ year, data=EAR)
+summary(LM_20_EAR)
+
+# Model validation figures - Figure 3 - figure supplement 1
+#Spend x Residuals Plot
+plot(LM_20_EAR$resid~EAR$Ave_PF[order(EAR$Ave_PF)],
+     main="20-Hz note peak frequency x Residuals\nfor Simple Regression",
+     xlab="INIs", ylab="Residuals")
+abline(h=0,lty=2)
+
+#Histogram of Residuals
+hist(LM_20_EAR$resid, main="Histogram of Residuals", xlab="Residuals",
+     ylab="Observations")
+
+#Q-Q Plot
+qqnorm(LM_20_EAR$resid)
+qqline(LM_20_EAR$resid)
+
+#Peak frequencies of the HF note================================================================
+HF_lm<-read.csv(file="HF_ave.csv", header=TRUE, dec=".")
+HF_LM<-lm(Ave_PF ~ year, data=HF_lm)
+summary(HF_LM)
+
+# Model validation figures - Figure 3 - figure supplement 1
+#Spend x Residuals Plot
+plot(HF_LM$resid~HF_lm$Ave_peak_freq[order(HF_lm$Ave_peak_freq)],
+     main="HF note peak frequency x Residuals\nfor Simple Regression",
+     xlab="INIs", ylab="Residuals")
+abline(h=0,lty=2)
+
+#Histogram of Residuals
+hist(HF_LM$resid, main="Histogram of Residuals", xlab="Residuals",
+     ylab="Observations")
+
+#Q-Q Plot
+qqnorm(HF_LM$resid)
+qqline(HF_LM$resid)
+```
+
 
