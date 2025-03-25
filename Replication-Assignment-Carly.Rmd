@@ -35,6 +35,9 @@ library (dendextend)
 library(grid)
 library(gtable)
 library(ggprism)
+library(ggimage)
+library(png)
+library(grid)
 ```
 
 Special Case for "gganimate"
@@ -48,6 +51,23 @@ library(gganimate)
 
 **R was not used to generate figure 1A for the paper, so I am inserting it here**
 ![Figure 1A] 
+```{r}
+# loading the image
+image1a <- "~/Desktop/DATA/fig1A.png"
+img <- readPNG(image1a) #reading my image in PNG format and converting it to an array/matrix
+
+xhat <- 0.58   # adjusting for right/left movement of my circle
+yhat <- 0.17   # adjusting for up/down movement of my circle
+
+# plotting a red circle to overlay the image to identify the coordinate of interest
+img1a <- ggplot() +
+  annotation_custom(rasterGrob(img, width = unit(1, "npc"), height = unit(1, "npc"))) +
+  geom_point(aes(x = xhat, y = yhat), color = "red", size = 16, shape = 1, stroke = 1.5) +  
+  theme_void() +
+  coord_fixed(xlim = c(0, 1.5), ylim = c(0, 1)) 
+print(img1a)
+```
+
 
 Data Time: 
 
