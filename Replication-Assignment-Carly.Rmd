@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+options(warn=-1)
 ```
 
 ## Loading Required Packages
@@ -332,7 +333,10 @@ ini1718_g <- ggplot(ini1718, aes(INI, fill=Region)) +
   scale_fill_manual(values=c( "darkviolet", "darkblue"))
 ini1718_g
 
-grid.arrange (ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g, ncol=2)
+grid.arrange (ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g,
+              ncol = 2, 
+              widths = c(3, 3), 
+              heights = c(3, 3, 3))
 ```
 
 
@@ -342,8 +346,6 @@ hf_all<-read.csv(file="~/Desktop/DATA/HF_all.csv", header=TRUE, dec=".")
 
 #2015/2016======================================================================
 hf1516<-subset(hf_all, year2=="2015/2016") #wrong column labeled in original datafile
-# >carly idk if this will work
-hf1516$Peak_Freq[!is.finite(hf1516$Peak_Freq)] <- NA
 
 hf1516_g <- ggplot(hf1516, aes(Peak_Freq, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=18) +
@@ -400,7 +402,10 @@ hf1718_g <- ggplot(hf1718, aes(Peak_Freq, fill=Region)) +
   scale_fill_manual(values=c("darkviolet", "blue"))
 hf1718_g
 
-grid.arrange (hf1516_g, hf1617_g, nrow=2)
+grid.arrange(ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g, 
+             ncol = 2, 
+             widths = c(2, 2), 
+             heights = c(2, 2, 2))
 ```
 
 
