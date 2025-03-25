@@ -39,8 +39,9 @@ library(ggprism)
 Special Case for "gganimate"
 ```{r}
 # in order to install this final package, it's dependent on already having the packages "ggplot2", "gifski", and "transformr" installed (do this first)
-install.packages(c("ggplot2", "gifski", "transformr"))
-install.packages(gganimate)
+library(ggplot2)
+library(gifski)
+library(transformr)
 library(gganimate)
 ```
 
@@ -213,7 +214,7 @@ HF_b
 
 ```{r}
 #Fig. 3A: Histograms of all INI measurements from the same singing season
-ini_all<-read.csv(file="INI_all.csv", header=TRUE, dec=".")
+ini_all<-read.csv(file="~/Desktop/DATA/INI_all.csv", header=TRUE, dec=".")
 
 #2006/2007====================================================
 ini0607<-subset(ini_all, year2=="2006/2007")
@@ -225,12 +226,12 @@ ini0607_g <- ggplot(ini0607, aes(INI, fill=Region)) +
         panel.grid.minor = element_blank(),
         plot.title = element_text(size = 18, family = "Times", face = "bold"),
         text=element_text(family = "Times"),
-        axis.title = element_text(face="bold", size = 28),
+        axis.title = element_text(face="bold", size = 20),
         axis.title.y = element_blank(),
         axis.title.x=element_blank(),
-        axis.text.x = element_text(colour="black", size = 28),
-        axis.text.y = element_text(colour="black", size = 28), legend.position = "top", 
-        legend.text=element_text(size=28), legend.title=element_blank()) +
+        axis.text.x = element_text(colour="black", size = 12),
+        axis.text.y = element_text(colour="black", size = 12), legend.position = "top", 
+        legend.text=element_text(size=12), legend.title=element_blank()) +
   scale_x_continuous(limits=c(6,20)) +
   scale_fill_manual(values=c("turquoise", "darkblue"))
 ini0607_g
@@ -244,12 +245,12 @@ ini0708_g <- ggplot(ini0708, aes(INI, fill=Region)) +
         panel.grid.minor = element_blank(),
         plot.title = element_text(size = 18, family = "Times", face = "bold"),
         text=element_text(family = "Times"),
-        axis.title = element_text(face="bold", size = 28),
+        axis.title = element_text(face="bold", size = 20),
         axis.title.y = element_blank(),
         axis.title.x=element_blank(),
-        axis.text.x = element_text(colour="black", size = 28),
-        axis.text.y = element_text(colour="black", size = 28), legend.position = "top", 
-        legend.text=element_text(size=28), legend.title=element_blank()) +
+        axis.text.x = element_text(colour="black", size = 12),
+        axis.text.y = element_text(colour="black", size = 12), legend.position = "top", 
+        legend.text=element_text(size=12), legend.title=element_blank()) +
   scale_x_continuous(limits=c(6,20)) +
   scale_fill_manual(values=c("black", "darkblue","red"))
 ini0708_g
@@ -263,12 +264,12 @@ ini1415_g <- ggplot(ini1415, aes(INI, fill=Region)) +
         panel.grid.minor = element_blank(),
         plot.title = element_text(size = 18, family = "Times", face = "bold"),
         text=element_text(family = "Times"),
-        axis.title = element_text(face="bold", size = 28),
+        axis.title = element_text(face="bold", size = 20),
         axis.title.y = element_blank(),
         axis.title.x=element_blank(),
-        axis.text.x = element_text(colour="black", size = 28),
-        axis.text.y = element_text(colour="black", size = 28), legend.position = "top", 
-        legend.text=element_text(size=28), legend.title=element_blank()) +
+        axis.text.x = element_text(colour="black", size = 12),
+        axis.text.y = element_text(colour="black", size = 12), legend.position = "top", 
+        legend.text=element_text(size=12), legend.title=element_blank()) +
   scale_fill_manual(values=c("darkviolet", "darkorange")) +
   scale_x_continuous(limits=c(6,20)) +
   scale_y_continuous(name = "Count")
@@ -283,12 +284,12 @@ ini1516_g <- ggplot(ini1516, aes(INI, fill=Region)) +
         panel.grid.minor = element_blank(),
         plot.title = element_text(size = 18, family = "Times", face = "bold"),
         text=element_text(family = "Times"),
-        axis.title = element_text(face="bold", size = 28),
+        axis.title = element_text(face="bold", size = 20),
         axis.title.y = element_blank(),
         axis.title.x=element_blank(),
-        axis.text.x = element_text(colour="black", size = 28, vjust=0.5),
-        axis.text.y = element_text(colour="black", size = 28), legend.position = "top", 
-        legend.text=element_text(size=28), legend.title=element_blank()) +
+        axis.text.x = element_text(colour="black", size = 12, vjust=0.5),
+        axis.text.y = element_text(colour="black", size = 12), legend.position = "top", 
+        legend.text=element_text(size=12), legend.title=element_blank()) +
   scale_x_continuous(limits=c(6,20)) + 
   scale_fill_manual(values=c("darkviolet", "green4", "red"))
 ini1516_g
@@ -302,12 +303,12 @@ ini1617_g <- ggplot(ini1617, aes(INI, fill=Region)) +
         panel.grid.minor = element_blank(),
         plot.title = element_text(size = 18, family = "Times", face = "bold"),
         text=element_text(family = "Times"),
-        axis.title = element_text(face="bold", size = 28),
+        axis.title = element_text(face="bold", size = 20),
         axis.title.y = element_blank(),
         axis.title.x=element_blank(),
-        axis.text.x = element_text(colour="black", size = 28, vjust=0.5),
-        axis.text.y = element_text(colour="black", size = 28), legend.position = "top", 
-        legend.text=element_text(size=28), legend.title=element_blank()) +
+        axis.text.x = element_text(colour="black", size = 12, vjust=0.5),
+        axis.text.y = element_text(colour="black", size = 12), legend.position = "top", 
+        legend.text=element_text(size=12), legend.title=element_blank()) +
   scale_x_continuous(limits=c(6,20)) +
   scale_fill_manual(values=c("green4", "darkblue"))
 ini1617_g
@@ -321,23 +322,29 @@ ini1718_g <- ggplot(ini1718, aes(INI, fill=Region)) +
         panel.grid.minor = element_blank(),
         plot.title = element_text(size = 18, family = "Times", face = "bold"),
         text=element_text(family = "Times"),
-        axis.title = element_text(face="bold", size = 28),
+        axis.title = element_text(face="bold", size = 20),
         axis.title.y = element_blank(),
         axis.title.x=element_blank(),
-        axis.text.x = element_text(colour="black", size = 28),
-        axis.text.y = element_text(colour="black", size = 28), legend.position = "top", 
-        legend.text=element_text(size=28), legend.title=element_blank()) +
+        axis.text.x = element_text(colour="black", size = 12),
+        axis.text.y = element_text(colour="black", size = 12), legend.position = "top", 
+        legend.text=element_text(size=12), legend.title=element_blank()) +
   scale_x_continuous(limits=c(6,20)) +
   scale_fill_manual(values=c( "darkviolet", "darkblue"))
 ini1718_g
 
 grid.arrange (ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g, ncol=2)
+```
 
+
+```{r}
 #Fig 3B: Histograms of all peak frequencies of the HF note from the same singing season
-hf_all<-read.csv(file="HF_all.csv", header=TRUE, dec=".")
+hf_all<-read.csv(file="~/Desktop/DATA/HF_all.csv", header=TRUE, dec=".")
 
 #2015/2016======================================================================
-hf1516<-subset(hf_all, year_s=="2015/2016")
+hf1516<-subset(hf_all, year2=="2015/2016") #wrong column labeled in original datafile
+# >carly idk if this will work
+hf1516$Peak_Freq[!is.finite(hf1516$Peak_Freq)] <- NA
+
 hf1516_g <- ggplot(hf1516, aes(Peak_Freq, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=18) +
   theme_bw() +  
@@ -345,18 +352,18 @@ hf1516_g <- ggplot(hf1516, aes(Peak_Freq, fill=Region)) +
         panel.grid.minor = element_blank(),
         plot.title = element_text(size = 18, family = "Times", face = "bold"),
         text=element_text(family = "Times"),
-        axis.title = element_text(face="bold", size = 28),
+        axis.title = element_text(face="bold", size = 20),
         axis.title.y = element_blank(),
         axis.title.x=element_blank(),
-        axis.text.x = element_text(colour="black", size = 28),
-        axis.text.y = element_text(colour="black", size = 28), legend.position = "none", 
-        legend.text=element_text(size=28), legend.title=element_blank()) +
+        axis.text.x = element_text(colour="black", size = 20),
+        axis.text.y = element_text(colour="black", size = 20), legend.position = "none", 
+        legend.text=element_text(size=20), legend.title=element_blank()) +
   scale_x_continuous(limits=c(120,135)) +
   scale_fill_manual(values=c("darkviolet","red","green4"))
 hf1516_g
 
 #2016/2017==========================================================================
-hf1617<-subset(hf_all, year_s=="2016/2017")
+hf1617<-subset(hf_all, year2=="2016/2017")
 hf1617_g <- ggplot(hf1617, aes(Peak_Freq, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=15) +
   theme_bw() +  
@@ -364,18 +371,18 @@ hf1617_g <- ggplot(hf1617, aes(Peak_Freq, fill=Region)) +
         panel.grid.minor = element_blank(),
         plot.title = element_text(size = 18, family = "Times", face = "bold"),
         text=element_text(family = "Times"),
-        axis.title = element_text(face="bold", size = 28),
+        axis.title = element_text(face="bold", size = 20),
         axis.title.y = element_blank(),
         axis.title.x=element_blank(),
-        axis.text.x = element_text(colour="black", size = 28, vjust=0.5),
-        axis.text.y = element_text(colour="black", size = 28), legend.position = "none", 
-        legend.text=element_text(size=22), legend.title=element_blank()) +
+        axis.text.x = element_text(colour="black", size = 20, vjust=0.5),
+        axis.text.y = element_text(colour="black", size = 20), legend.position = "none", 
+        legend.text=element_text(size=20), legend.title=element_blank()) +
   scale_x_continuous(limits=c(120,135)) +
   scale_fill_manual(values=c("green4", "blue"))
 hf1617_g
 
 #2017/2018=============================================================================
-hf1718<-subset(hf_all, year_s=="2017/2018")
+hf1718<-subset(hf_all, year2=="2017/2018")
 hf1718_g <- ggplot(hf1718, aes(Peak_Freq, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=15) +
   theme_bw() +  
@@ -383,12 +390,12 @@ hf1718_g <- ggplot(hf1718, aes(Peak_Freq, fill=Region)) +
         panel.grid.minor = element_blank(),
         plot.title = element_text(size = 18, family = "Times", face = "bold"),
         text=element_text(family = "Times"),
-        axis.title = element_text(face="bold", size = 28),
+        axis.title = element_text(face="bold", size = 20),
         axis.title.y = element_blank(),
         axis.title.x=element_blank(),
-        axis.text.x = element_text(colour="black", size = 28, vjust=0.5),
-        axis.text.y = element_text(colour="black", size = 28), legend.position = "none", 
-        legend.text=element_text(size=22), legend.title=element_blank()) +
+        axis.text.x = element_text(colour="black", size = 20, vjust=0.5),
+        axis.text.y = element_text(colour="black", size = 20), legend.position = "none", 
+        legend.text=element_text(size=20), legend.title=element_blank()) +
   scale_x_continuous(limits=c(120,135)) +
   scale_fill_manual(values=c("darkviolet", "blue"))
 hf1718_g
