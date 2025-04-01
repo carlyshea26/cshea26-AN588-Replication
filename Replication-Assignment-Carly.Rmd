@@ -59,6 +59,7 @@ library(ggplot2)
 library(gifski)
 library(transformr)
 library(gganimate)
+library(patchwork)
 ```
 
 ### Figure 1A 
@@ -162,8 +163,8 @@ grid.arrange(
 
 
 
-#Figure 3:
 ```{r}
+#Figure 3A:
 bout0620<-read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
 
 bout0620$date <-as.Date(bout0620$date, format = "%d/%m/%Y")
@@ -175,16 +176,16 @@ ini_b_0620 <- ggplot(bout0620, aes(x = date, y = Ave_INI, color= Region)) +
                      limits=c(7.8, 21.5), guide = guide_prism_minor()) + 
   theme_bw() +  
   scale_x_date (breaks="1 year", date_labels="%Y")+
-  theme(plot.title = element_text(size = 18, family = "Times", face = "bold"),
+  theme(plot.title = element_text(size = 15, family = "Times", face = "bold"),
         text=element_text(family = "Times"),panel.grid.major.y = element_line(colour="black", linetype=2), 
         panel.grid.minor = element_blank(),panel.grid.major.x = element_line(colour="black", linetype=2),
-        strip.text.x = element_text(size = 18, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
+        strip.text.x = element_text(size = 15, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
         strip.background = element_rect(fill="grey97"),
-        axis.title.y = element_text(colour="black", size = 20, face="bold"),
+        axis.title.y = element_text(colour="black", size = 15, face="bold"),
         axis.title.x = element_blank(),
-        axis.text.x = element_text(colour="black", size = 20, vjust=0.5, angle=90),
-        axis.text.y = element_text(colour="black", size = 20), legend.position = "top", 
-        legend.text=element_text(size=22), legend.title=element_blank()) +
+        axis.text.x = element_text(colour="black", size = 15, vjust=0.5, angle=90),
+        axis.text.y = element_text(colour="black", size = 15), legend.position = "top", 
+        legend.text=element_text(size=15), legend.title=element_blank()) +
   scale_color_manual(values=c("darkviolet","darkorange","green4", "black","turquoise","darkblue","red" )) +
   #facet_grid(~year3, scale="free_x")
   stat_smooth( method = "glm",aes(group=1), colour = "black", fill= "grey", size=0.5)
@@ -220,10 +221,10 @@ freq20_b_EAR <- ggplot(EARs, aes(x = date, y = Ave_PF, color= Region)) +
   stat_smooth(method = "glm",aes(group=1), colour = "black", fill= "grey", size=0.5)
 print(freq20_b_EAR)
 ```
-#FIGURE 3C:
-```{r}
-HF<-read.csv(file="~/Desktop/DATA/HF_ave.csv", header=TRUE, dec=".")
 
+```{r}
+#FIGURE 3C:
+HF<-read.csv(file="~/Desktop/DATA/HF_ave.csv", header=TRUE, dec=".")
 HF$date <-as.Date(HF$date, format = "%d/%m/%Y")
 
 HF_b <- ggplot(HF, aes(x = date, y = Ave_PF, color= Region)) +
@@ -233,24 +234,26 @@ HF_b <- ggplot(HF, aes(x = date, y = Ave_PF, color= Region)) +
                      limits=c(122, 138)) + 
   theme_bw() +  
   scale_x_date(breaks="1 year", date_labels="%Y") +
-  theme(plot.title = element_text(size = 18, family = "Times", face = "bold"),
+  theme(plot.title = element_text(size = 16, family = "Times", face = "bold"),
         text=element_text(family = "Times"),panel.grid.major.y = element_line(colour="black", linetype=2),
         panel.grid.minor = element_blank(),panel.grid.major.x = element_line(colour="black", linetype=2),
-        strip.text.x = element_text(size = 18, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
+        strip.text.x = element_text(size = 12, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
         strip.background = element_rect(fill="grey97"),
-        axis.title = element_text(face="bold", size = 20),
+        axis.title = element_text(face="bold", size = 12),
         axis.title.x = element_blank(),
-        axis.text.x = element_text(colour="black", size = 20, vjust=0.5, angle=90),
-        axis.text.y = element_text(colour="black", size = 20), legend.position = "top", 
-        legend.text=element_text(size=16), legend.title=element_blank()) +
+        axis.text.x = element_text(colour="black", size = 12, vjust=0.5, angle=90),
+        axis.text.y = element_text(colour="black", size = 12), legend.position = "top", 
+        legend.text=element_text(size=12), legend.title=element_blank()) +
   scale_color_manual(values=c("darkviolet", "red", "green4","black","turquoise", "blue")) +
   #facet_grid(~year2, scale="free_x") 
   stat_smooth(method = "glm",aes(group=1), colour = "black", fill= "grey", lwd=0.5)
 HF_b
 ```
 
+
+
 ```{r}
-#Fig. 3A: Histograms of all INI measurements from the same singing season
+#Fig.4 : Histograms of all INI measurements from the same singing season
 ini_all<-read.csv(file="~/Desktop/DATA/INI_all.csv", header=TRUE, dec=".")
 
 #2006/2007====================================================
@@ -263,7 +266,7 @@ ini0607_g <- ggplot(ini0607, aes(INI, fill=Region)) +
         panel.grid.minor = element_blank(),
         plot.title = element_text(size = 18, family = "Times", face = "bold"),
         text=element_text(family = "Times"),
-        axis.title = element_text(face="bold", size = 20),
+        axis.title = element_text(face="bold", size = 12),
         axis.title.y = element_blank(),
         axis.title.x=element_blank(),
         axis.text.x = element_text(colour="black", size = 12),
@@ -445,4 +448,4 @@ grid.arrange(ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g,
 ```
 
 
-Do supplementary qq plots
+
