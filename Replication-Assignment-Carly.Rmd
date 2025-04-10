@@ -81,7 +81,10 @@ img1a <- ggplot() +
 print(img1a)
 ```
 
-### Figure 1B = INI percentage song type in SE location from the ONA region]
+**A Note: I somewhat cheated by inserting the screenshot provided by the initial research team - however, this figure is solely inserted to mimic the original paper's figure one to the best of my ability**
+
+
+### Figure 1B = INI percentage song type in South East location from the ONA region
 ```{r}
 perc_SE<-read.csv(file="~/Desktop/DATA/Perc_SE_songs.csv", header=TRUE, dec=".")
 str(perc_SE)
@@ -89,12 +92,14 @@ perc_SE$INI <- factor(perc_SE$INI, levels = c("19s", "Hyb", "12s"))
 
 # "Make sure perc and Rythm are in the correct format" - but this is wrong (Ry)
 perc_SE$perc <- as.numeric(perc_SE$perc)
-perc_SE$INI <- factor(perc_SE$INI) #no column in the file that has rhythm in it - changed original rythm to INI?
+perc_SE$INI <- factor(perc_SE$INI) #no column in the file that has rhythm in it - changed original rhythm to INI?
+# there could be a relationship between INI and rhythm in this context (they very well could represent the same thing)...however... i think that this should be clearer either in their readme file or in their actual methods outlining how they analyzed this portion of their study via R 
+# why you might ask? because i spent 2 hours trying to troubleshoot using the "Rhythm" variable when it simply did not exist in the original CV file
 
-perc<-ggplot(perc_SE, aes(fill=INI, y=perc, x=year)) +
+perc <- ggplot(perc_SE, aes(fill=INI, y=perc, x=year)) +
   geom_bar(position="fill", stat="identity", width=0.5) +
-  scale_y_continuous(name = "INI type (%)",labels = scales::percent_format())+
-  theme_bw() +
+  scale_y_continuous(name = "INI type (%)",labels = scales::percent_format()) +
+  theme_bw()+
   theme(text=element_text(family = "Times"),panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         strip.text.x = element_text(size = 12, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
@@ -115,7 +120,7 @@ perc<-ggplot(perc_SE, aes(fill=INI, y=perc, x=year)) +
 #adding annotation for "No Data" (attempting to center it)
   annotate("text", x = which(perc_SE$year == "2001/2002")[1], y = 0.5, 
            label = "No Data", family = "Times", angle = 90, vjust = -0.5, hjust = .5, size = 4)
-print(perc)
+print(perc) #printing the figure (sanity check)
 ```
 
 ### Figure 1C
@@ -129,14 +134,16 @@ head(bout9905$date) #printing data to see how it looks
 ```
 
 ```{r}
-#Figure 1C:
-ini_b_9905 <- ggplot(bout9905, aes(x = date, y = Ave_INI)) +
+#Figure 1C: INI's collected from 1999 to 2005 from the ONA region
+ini_b_9905 <- ggplot(bout9905, aes(x = date, y = Ave_INI)) + #plotting date against average INI for the ONA region
   geom_point(size=2, aes(group=1), color="darkblue")+
   geom_errorbar(aes(ymin=Ave_INI-SD_INI, ymax=Ave_INI+SD_INI),width=2, color="darkblue") +
   scale_y_continuous(name = "Average song INI (s)",
-                     limits=c(9, 20), guide = guide_prism_minor()) + theme_bw() +  labs(tag = "C") +
-  scale_x_date(breaks="6 month", date_labels="%b %y")+
-  theme(plot.title = element_text(size = 18, family = "Times", face = "bold"),
+                     limits=c(9, 20), guide = guide_prism_minor()) + theme_bw() +  labs(tag = "C") + #setting limits so that my figure doesn't look crazy
+  scale_x_date(breaks="6 month", date_labels="%b %y")
+
+#formatting axes titles and plot details
+ini_b_9905 <- ini_b_9905 + theme(plot.title = element_text(size = 18, family = "Times", face = "bold"),
         text=element_text(family = "Times"),panel.grid.major.y = element_line(colour="black", linetype=2), 
         panel.grid.minor = element_blank(), panel.grid.major.x = element_line(colour="black", linetype=2), strip.text.x = element_text(size = 10, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
         strip.background = element_rect(fill="grey97"),
@@ -148,7 +155,7 @@ ini_b_9905 <- ggplot(bout9905, aes(x = date, y = Ave_INI)) +
 print(ini_b_9905)
 ```
 ```{r}
-#arranging figure sections A-C in 1 to compare to actual study
+#Arranging Figure Sections A-C in 1 to Compare to the Actual Study's Figure 1
 grid.arrange(
   arrangeGrob(img1a, perc, ncol = 2),  
   ini_b_9905,                          
@@ -161,10 +168,14 @@ grid.arrange(
 #Comments Regarding Figure 1:
 - Researchers tried to run this model using a column title called "perc_SEdollarsignRythm", which does not exist and is not found anywhere else in the above code. I renamed this to the column "perc_SEdollarsignINI", which still properly mirrors the 1B figure in the original paper. I believe this was just a naming mishap that could have arisen from their end
 
+> Carly: need to do some final formatting changes associated with Figure One - also insert image created by researchers
+- structure your note that you add so it doesnt start in the middle of Figure 1A
+> Fix first image you tried to insert for your intro - or push it to your repository so that all images there are present and its easier to render
 
 
+## Figure 3
 ```{r}
-#Figure 3A:
+#Figure 3A: INI gradient from 2006 to 2020 for all locations and regions
 bout0620<-read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
 
 bout0620$date <-as.Date(bout0620$date, format = "%d/%m/%Y")
@@ -250,6 +261,35 @@ HF_b <- ggplot(HF, aes(x = date, y = Ave_PF, color= Region)) +
 HF_b
 ```
 
+
+> Carly: How can i create a chunk to concatenate these three subfigures together 
+- Confirm if titles for each subfigure actually represent the correct figures themselves
+
+> getting an error below with the linear model i am trying to run - cross reference with supplemental figure 1 - thats what this is mirroring
+
+## LINEAR MODEL TIME: RUNNING INTO ERROR WITH MATRIX
+```{r}
+INI_lm<-read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
+LM_ini<-lm(Ave_INI ~ year, data=INI_lm)
+summary(LM_ini)
+
+# Model validation figures for Figure 3 - figure supplement 1
+#layout(matrix(c(1,2,3),c(3,3,3), byrow=TRUE)) #running into an error HERE!!!
+par(mfrow = c(3, 3))
+
+#Spend x Residuals Plot
+plot(LM_ini$resid~INI_lm$Ave_INI[order(INI_lm$Ave_INI)],
+     main="Internote intervals(INIs)x Residuals\nfor Simple Regression",
+     xlab="INIs", ylab="Residuals")
+abline(h=0,lty=2)
+
+#Histogram of Residuals
+hist(LM_ini$resid, main="Histogram of Residuals", xlab="Residuals",
+     ylab="Observations")
+```
+
+> recreating qq plots from supplemental figure as well - cross reference with supplemental section from actual paper 
+- cant run them until issue with histograms is resolved - in meantime cross reference with supplemental figures themselves
 
 
 ```{r}
@@ -448,4 +488,58 @@ grid.arrange(ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g,
 ```
 
 
+END: COULD DO WILCOX PAIRWISE COMPARISONS !!! 
+> need to load required packages when you have wifi to see what happens
+- pasted the code below to review later when wifi works
+
+"
+#Supplementary material: Test OBS - EARS
+#Wilcox test pariwise comparisons ==============================================
+library (coin)
+library(rstatix)
+
+test<-read.csv(file="~/Desktop/DATA/test_ear_obs.csv", header=TRUE, dec=".")
+median(test$INI_ear)
+median (test$INI_obs)
+median(test$Peak_freq_ear)
+median (test$Peak_freq_obs)
+
+ini_test <- wilcox.test(test$INI_ear, test$INI_obs, paired=TRUE)
+ini_test
+
+freq_test <- wilcox.test(test$Peak_freq_ear, test$Peak_freq_obs, paired=TRUE)
+freq_test
+
+#Figure 3 - figure supplement 2:Averaged peak frequencies of the 20-Hz notes per song from all data
+bout99<-read.csv(file="PF_ave_all.csv", header=TRUE, dec=".")
+bout99$date <-as.Date(bout99$date, format = "%Y/%m/%d")
+
+freq20_b <- ggplot(bout99, aes(x = date, y = Ave_PF, color= Region, shape= Recorder)) +
+  geom_point(size=2, bg="black", lwd=2, aes(group=1))+
+  geom_errorbar(aes(ymin=Ave_PF-SD_PF, ymax=Ave_PF+SD_PF),width=30) +
+  scale_y_continuous(name = "Average song \n20-Hz note peak frequency (Hz)",
+                     limits=c(18, 27)) + theme_bw() +  
+  scale_x_date (breaks="1 year", date_labels="%Y")+
+  theme(plot.title = element_text(size = 18, family = "Times", face = "bold"),
+                                           text=element_text(family = "Times"),panel.grid.major.y = element_line(colour="black", linetype=2), 
+                                           panel.grid.minor = element_blank(),panel.grid.major.x = element_line(colour="black", linetype=2),
+                                           strip.text.x = element_text(size = 18, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
+                                           strip.background = element_rect(fill="grey97"),
+                                           axis.title = element_text(face="bold", size = 32),
+                                           axis.title.x = element_blank(),
+                                           axis.text.x = element_text(colour="black", size = 32, vjust=0.5, angle=90),
+                                           axis.text.y = element_text(colour="black", size = 32), legend.position = "top", 
+                                           legend.text=element_text(size=20), legend.title=element_blank()) +
+  scale_color_manual(values=c("darkviolet", "darkorange", "green4", "black", "red", "turquoise", "darkblue"))
+
+freq20_b
+"
+
+> CHANGES TO HISTOGRAMS: figure out a way to make the plots themselves larger in the combined image 
+- final check - sent to j and make sure that he can run this on his computer 
+- make notes collapseable so you're taking up less space in final presentation 
+- label all figures A B etc like u did with figure 1
+- include introduction information / brief methods section 
+- End with your critiques and opinions of the overall paper 
+- idk if i want to recreate the table showing parameters they looked at - ask j his opinion on how to make this 
 
