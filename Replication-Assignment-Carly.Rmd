@@ -81,8 +81,10 @@ img1a <- ggplot() +
 print(img1a)
 ```
 
-**A Note: I somewhat cheated by inserting the screenshot provided by the initial research team - however, this figure is solely inserted to mimic the original paper's figure one to the best of my ability**
-
+<details>
+<summary>🐋 Note about this figure</summary>
+**A Note:** I somewhat cheated by inserting the screenshot provided by the initial research team — however, this figure is solely inserted to mimic the original paper's figure one to the best of my ability.
+</details>
 
 ### Figure 1B = INI percentage song type in South East location from the ONA region
 ```{r}
@@ -267,15 +269,16 @@ HF_b
 
 > getting an error below with the linear model i am trying to run - cross reference with supplemental figure 1 - thats what this is mirroring
 
+Supplemental Figure: 
 ## LINEAR MODEL TIME: RUNNING INTO ERROR WITH MATRIX
 ```{r}
-INI_lm<-read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
-LM_ini<-lm(Ave_INI ~ year, data=INI_lm)
-summary(LM_ini)
+# Model validation figures - Figure 3 - figure supplement 1
 
-# Model validation figures for Figure 3 - figure supplement 1
-#layout(matrix(c(1,2,3),c(3,3,3), byrow=TRUE)) #running into an error HERE!!!
 par(mfrow = c(3, 3))
+
+INI_lm <- read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
+LM_ini <- lm(Ave_INI ~ year, data=INI_lm)
+summary(LM_ini)
 
 #Spend x Residuals Plot
 plot(LM_ini$resid~INI_lm$Ave_INI[order(INI_lm$Ave_INI)],
@@ -286,10 +289,48 @@ abline(h=0,lty=2)
 #Histogram of Residuals
 hist(LM_ini$resid, main="Histogram of Residuals", xlab="Residuals",
      ylab="Observations")
+
+#Q-Q Plot
+qqnorm(LM_ini$resid)
+qqline(LM_ini$resid)
+
+# Repeating this process for 20 Hz note frequencies
+EAR <- read.csv(file="~/Desktop/DATA/20Hz_ave_EARs.csv", header=TRUE, dec=".")
+LM_20_EAR<-lm(Ave_PF ~ year, data=EAR)
+summary(LM_20_EAR)
+
+# Spend x Residuals Plot
+plot(LM_20_EAR$resid~EAR$Ave_PF[order(EAR$Ave_PF)],
+     main="20-Hz note peak frequency x Residuals\nfor Simple Regression",
+     xlab="INIs", ylab="Residuals")
+abline(h=0,lty=2)
+
+# Histogram of Residuals
+hist(LM_20_EAR$resid, main="Histogram of Residuals", xlab="Residuals",
+     ylab="Observations")
+
+#Q-Q Plot
+qqnorm(LM_20_EAR$resid)
+qqline(LM_20_EAR$resid)
+
+
+HF_lm <- read.csv(file="~/Desktop/DATA/HF_ave.csv", header=TRUE, dec=".")
+HF_LM <- lm(Ave_PF ~ year, data=HF_lm)
+
+plot(HF_LM$resid~HF_lm$Ave_PF[order(HF_lm$Ave_PF)], #originally had this as Ave_peak_frequency - this is not the column title in their CV (CV column= Ave_PF)
+     main="HF note peak frequency x Residuals\nfor Simple Regression",
+     xlab="INIs", ylab="Residuals")
+abline(h=0,lty=2)
+
+#Histogram of Residuals
+hist(HF_LM$resid, main="Histogram of Residuals", xlab="Residuals",
+     ylab="Observations")
+
+#Q-Q Plot
+qqnorm(HF_LM$resid)
+qqline(HF_LM$resid)
 ```
 
-> recreating qq plots from supplemental figure as well - cross reference with supplemental section from actual paper 
-- cant run them until issue with histograms is resolved - in meantime cross reference with supplemental figures themselves
 
 
 ```{r}
