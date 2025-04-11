@@ -1,7 +1,6 @@
 ---
 title: "Replication Assignment Carly"
 author: "Carly S McDermott"
-date: "2025-03-21"
 output:
   html_document:
     theme:
@@ -18,8 +17,9 @@ knitr::opts_chunk$set(echo = TRUE)
 options(warn=-1)
 ```
 
+
 <div align="center">
-  <img src="https://www.dolphinsafari.com/wp-content/uploads/sites/5012/2024/08/Fin-Whale-Drone-0769-1_1200x800_Copyright-Dolphin-Safari.jpg?w=700&h=700&zoom=2" alt="Centered Image" width="500">
+  <img src="/Users/carlymcdermott/Desktop/DATA/finwhale.png" alt="Centered Image" width="500">
 </div>
 
 ## Loading Required Packages
@@ -62,6 +62,7 @@ library(gganimate)
 library(patchwork)
 ```
 
+## Figure 1
 ### Figure 1A 
 **R was not used to generate figure 1A for the paper, I am inserting it here**
 ```{r}
@@ -86,8 +87,9 @@ print(img1a)
 **A Note:** I somewhat cheated by inserting the screenshot provided by the initial research team — however, this figure is solely inserted to mimic the original paper's figure one to the best of my ability.
 </details>
 
-### Figure 1B = INI percentage song type in South East location from the ONA region
+### Figure 1B 
 ```{r}
+# Figure 1B: INI percentage song type in South East location from the ONA region
 perc_SE<-read.csv(file="~/Desktop/DATA/Perc_SE_songs.csv", header=TRUE, dec=".")
 str(perc_SE)
 perc_SE$INI <- factor(perc_SE$INI, levels = c("19s", "Hyb", "12s"))
@@ -117,7 +119,7 @@ perc <- ggplot(perc_SE, aes(fill=INI, y=perc, x=year)) +
   geom_segment(aes(x = which(perc_SE$year == "2001/2002")[1], 
                    xend = which(perc_SE$year == "2001/2002")[1], 
                    y = 0.01, yend = 0.99), 
-               linetype = "dashed", color = "black", linewidth = 1.5) +
+               linetype = "dashed", color = "black") +
 
 #adding annotation for "No Data" (attempting to center it)
   annotate("text", x = which(perc_SE$year == "2001/2002")[1], y = 0.5, 
@@ -267,10 +269,8 @@ HF_b
 > Carly: How can i create a chunk to concatenate these three subfigures together 
 - Confirm if titles for each subfigure actually represent the correct figures themselves
 
-> getting an error below with the linear model i am trying to run - cross reference with supplemental figure 1 - thats what this is mirroring
-
 Supplemental Figure: 
-## LINEAR MODEL TIME: RUNNING INTO ERROR WITH MATRIX
+## Linear Models
 ```{r}
 # Model validation figures - Figure 3 - figure supplement 1
 
@@ -278,7 +278,6 @@ fig_3_1 <- par(mfrow = c(3, 3))
 
 INI_lm <- read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
 LM_ini <- lm(Ave_INI ~ year, data=INI_lm)
-summary(LM_ini)
 
 #Spend x Residuals Plot
 plot(LM_ini$resid~INI_lm$Ave_INI[order(INI_lm$Ave_INI)],
@@ -332,25 +331,26 @@ qqline(HF_LM$resid)
 print(fig_3_1)
 ```
 <details>
-<summary>🐋 Side By Side Comparison of my Figure to Paper's </summary>
+<summary>🐋 Comparison to the Paper's Figure </summary>
 **A Quick Look at the Original Paper's Figure:** 
 ```{r}
-#Comparing it to the paper's supplemenatry figure 3.1:
+# Paper's supplementary figure 3.1:
 paper_plot <- "~/Desktop/DATA/figsup1paper.png"
 paper_plot <- readPNG(paper_plot) #reading my image in PNG format and converting it to an array/matrix
 grid.raster(paper_plot)
 ```
-</details>
+From how they both compare side by side, my plot vs. the plot featured in the paper appear very similar. I didn't have a lot of issues with this step as it was just a combination of histograms, q-q plots, and regressions.
 
+</details>
 
 ## Figure 4: Histograms!
 ```{r}
-#Fig.4 : Histograms of all INI measurements from the same singing season
+#Figure 4: Histograms of all INI measurements from the same singing season, for the actual individual graphs please click on the dropdown below this chunk!
+
 ini_all<-read.csv(file="~/Desktop/DATA/INI_all.csv", header=TRUE, dec=".")
 
-#2006/2007====================================================
+#2006/2007
 ini0607<-subset(ini_all, year2=="2006/2007")
-
 ini0607_g <- ggplot(ini0607, aes(INI, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=50) +
   theme_bw() +  
@@ -366,9 +366,8 @@ ini0607_g <- ggplot(ini0607, aes(INI, fill=Region)) +
         legend.text=element_text(size=12), legend.title=element_blank()) +
   scale_x_continuous(limits=c(6,20)) +
   scale_fill_manual(values=c("turquoise", "darkblue"))
-ini0607_g
 
-#2007/2008=============================================================
+#2007/2008
 ini0708<-subset(ini_all, year2=="2007/2008")
 ini0708_g <- ggplot(ini0708, aes(INI, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=50) +
@@ -385,9 +384,8 @@ ini0708_g <- ggplot(ini0708, aes(INI, fill=Region)) +
         legend.text=element_text(size=12), legend.title=element_blank()) +
   scale_x_continuous(limits=c(6,20)) +
   scale_fill_manual(values=c("black", "darkblue","red"))
-ini0708_g
 
-#2014/2015=============================================================
+#2014/2015
 ini1415<-subset(ini_all, year2=="2014/2015")
 ini1415_g <- ggplot(ini1415, aes(INI, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=30) + 
@@ -405,9 +403,8 @@ ini1415_g <- ggplot(ini1415, aes(INI, fill=Region)) +
   scale_fill_manual(values=c("darkviolet", "darkorange")) +
   scale_x_continuous(limits=c(6,20)) +
   scale_y_continuous(name = "Count")
-ini1415_g
 
-#2015/2016======================================================================
+#2015/2016
 ini1516<-subset(ini_all, year2=="2015/2016")
 ini1516_g <- ggplot(ini1516, aes(INI, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=50) +
@@ -424,9 +421,8 @@ ini1516_g <- ggplot(ini1516, aes(INI, fill=Region)) +
         legend.text=element_text(size=12), legend.title=element_blank()) +
   scale_x_continuous(limits=c(6,20)) + 
   scale_fill_manual(values=c("darkviolet", "green4", "red"))
-ini1516_g
 
-#2016/2017=========================================================================
+#2016/2017
 ini1617<-subset(ini_all, year2=="2016/2017")
 ini1617_g <- ggplot(ini1617, aes(INI, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=50) +
@@ -443,9 +439,8 @@ ini1617_g <- ggplot(ini1617, aes(INI, fill=Region)) +
         legend.text=element_text(size=12), legend.title=element_blank()) +
   scale_x_continuous(limits=c(6,20)) +
   scale_fill_manual(values=c("green4", "darkblue"))
-ini1617_g
 
-#2017/2018==========================================================================
+#2017/2018
 ini1718<-subset(ini_all, year2=="2017/2018")
 ini1718_g <- ggplot(ini1718, aes(INI, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=50) +
@@ -462,20 +457,37 @@ ini1718_g <- ggplot(ini1718, aes(INI, fill=Region)) +
         legend.text=element_text(size=12), legend.title=element_blank()) +
   scale_x_continuous(limits=c(6,20)) +
   scale_fill_manual(values=c( "darkviolet", "darkblue"))
-ini1718_g
-
-grid.arrange (ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g,
-              ncol = 2, 
-              widths = c(3, 3), 
-              heights = c(3, 3, 3))
 ```
 
+<details>
+<summary>🐋 CLICK HERE To View The Individual Histograms </summary>
+**Figure 4 Histograms:**
+```{r}
+print(ini0607_g) #2006/2007
+print(ini0708_g) #2007/2008
+print(ini1415_g) #2014/2015
+print(ini1516_g) #2015/2016
+print(ini1617_g) #2016/2017
+print(ini1718_g) #2017/2018
+```
+</details>
+
+Combining All Histograms Together In Single Plot
+```{r}
+ggarrange(ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g,
+          ncol = 2, nrow = 3,
+          align = "v",  # vertical alignment
+          labels = NULL,  # or use labels = c("A", "B", ...)
+          heights = c(1, 1, 1))
+```
+
+> CARLY: INCLUDE LEGENDS HERE
 
 ```{r}
 #Fig 3B: Histograms of all peak frequencies of the HF note from the same singing season
 hf_all<-read.csv(file="~/Desktop/DATA/HF_all.csv", header=TRUE, dec=".")
 
-#2015/2016======================================================================
+#2015/2016
 hf1516<-subset(hf_all, year2=="2015/2016") #wrong column labeled in original datafile
 
 hf1516_g <- ggplot(hf1516, aes(Peak_Freq, fill=Region)) +
@@ -495,7 +507,7 @@ hf1516_g <- ggplot(hf1516, aes(Peak_Freq, fill=Region)) +
   scale_fill_manual(values=c("darkviolet","red","green4"))
 hf1516_g
 
-#2016/2017==========================================================================
+#2016/2017
 hf1617<-subset(hf_all, year2=="2016/2017")
 hf1617_g <- ggplot(hf1617, aes(Peak_Freq, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=15) +
@@ -514,7 +526,7 @@ hf1617_g <- ggplot(hf1617, aes(Peak_Freq, fill=Region)) +
   scale_fill_manual(values=c("green4", "blue"))
 hf1617_g
 
-#2017/2018=============================================================================
+#2017/2018
 hf1718<-subset(hf_all, year2=="2017/2018")
 hf1718_g <- ggplot(hf1718, aes(Peak_Freq, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=15) +
@@ -533,24 +545,21 @@ hf1718_g <- ggplot(hf1718, aes(Peak_Freq, fill=Region)) +
   scale_fill_manual(values=c("darkviolet", "blue"))
 hf1718_g
 
-grid.arrange(ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g, 
-             ncol = 2, 
-             widths = c(2, 2), 
+grid.arrange(hf1516_g, hf1617_g, hf1718_g,
+             ncol = 1,
+             widths = 2, 
              heights = c(2, 2, 2))
 ```
 
 
-END: COULD DO WILCOX PAIRWISE COMPARISONS !!! 
-> need to load required packages when you have wifi to see what happens
-- pasted the code below to review later when wifi works
-
-"
-#Supplementary material: Test OBS - EARS
-#Wilcox test pariwise comparisons ==============================================
+Wilcox Pairwise Comparisons !! Test OBS - EARS
+```{r}
+# Supplementary material: Test OBS - EARS
+# Wilcox test for pairwise comparisons
 library (coin)
-library(rstatix)
+library(rstatix) #loading required packages
 
-test<-read.csv(file="~/Desktop/DATA/test_ear_obs.csv", header=TRUE, dec=".")
+test <-read.csv(file="~/Desktop/DATA/test_ear_obs.csv", header=TRUE, dec=".")
 median(test$INI_ear)
 median (test$INI_obs)
 median(test$Peak_freq_ear)
@@ -561,31 +570,53 @@ ini_test
 
 freq_test <- wilcox.test(test$Peak_freq_ear, test$Peak_freq_obs, paired=TRUE)
 freq_test
+```
+> CARLYL ADD INTERPRETATION HERE
 
-#Figure 3 - figure supplement 2:Averaged peak frequencies of the 20-Hz notes per song from all data
-bout99<-read.csv(file="PF_ave_all.csv", header=TRUE, dec=".")
-bout99$date <-as.Date(bout99$date, format = "%Y/%m/%d")
 
-freq20_b <- ggplot(bout99, aes(x = date, y = Ave_PF, color= Region, shape= Recorder)) +
-  geom_point(size=2, bg="black", lwd=2, aes(group=1))+
-  geom_errorbar(aes(ymin=Ave_PF-SD_PF, ymax=Ave_PF+SD_PF),width=30) +
+```{r}
+#Figure supplement 2: Averaged peak frequencies of the 20-Hz notes per song from all data
+bout99<-read.csv(file="~/Desktop/DATA/PF_ave_all.csv", header=TRUE, dec=".")
+bout99$date <-as.Date(bout99$date, format = "%d/%m/%Y")
+
+freq20_b <- ggplot(bout99, aes(x = date, y = Ave_PF, color = Region, shape = Recorder)) +
+  geom_point(size = 2, bg = "black", lwd = 2, aes(group = 1)) +
+  geom_errorbar(aes(ymin = Ave_PF - SD_PF, ymax = Ave_PF + SD_PF), width = 30) +
   scale_y_continuous(name = "Average song \n20-Hz note peak frequency (Hz)",
-                     limits=c(18, 27)) + theme_bw() +  
-  scale_x_date (breaks="1 year", date_labels="%Y")+
-  theme(plot.title = element_text(size = 18, family = "Times", face = "bold"),
-                                           text=element_text(family = "Times"),panel.grid.major.y = element_line(colour="black", linetype=2), 
-                                           panel.grid.minor = element_blank(),panel.grid.major.x = element_line(colour="black", linetype=2),
-                                           strip.text.x = element_text(size = 18, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
-                                           strip.background = element_rect(fill="grey97"),
-                                           axis.title = element_text(face="bold", size = 32),
-                                           axis.title.x = element_blank(),
-                                           axis.text.x = element_text(colour="black", size = 32, vjust=0.5, angle=90),
-                                           axis.text.y = element_text(colour="black", size = 32), legend.position = "top", 
-                                           legend.text=element_text(size=20), legend.title=element_blank()) +
-  scale_color_manual(values=c("darkviolet", "darkorange", "green4", "black", "red", "turquoise", "darkblue"))
+                     limits = c(18, 27)) +
+  scale_x_date(breaks = "1 year", date_labels = "%Y") +
+  scale_color_manual(values = c("darkviolet", "darkorange", "green4", "black", "red", "turquoise", "darkblue")) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, family = "Times", face = "bold"),
+    text = element_text(family = "Times"),
+    panel.grid.major.y = element_line(colour = "black", linetype = 2),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(colour = "black", linetype = 2),
+    strip.text.x = element_text(size = 12, face = "bold",
+                                margin = margin(0.5, 0, 0.5, 0, "cm")),
+    strip.background = element_rect(fill = "grey97"),
+    axis.title = element_text(face = "bold", size = 12),
+    axis.title.x = element_blank(),
+    axis.text.x = element_text(colour = "black", size = 12,
+                               vjust = 0.5, angle = 90),
+    axis.text.y = element_text(colour = "black", size = 12),
+    legend.position = "bottom",
+    legend.box = "horizontal",
+    legend.box.just = "center",
+    legend.text = element_text(size = 10),
+    legend.title = element_blank(),
+    legend.spacing.x = unit(0.3, 'cm'),
+    legend.spacing.y = unit(0.2, 'cm')
+  ) +
+  guides(
+    color = guide_legend(nrow = 3, byrow = TRUE, override.aes = list(size = 3)),
+    shape = guide_legend(nrow = 1, override.aes = list(size = 3))
+  )
+print(freq20_b)
+```
 
-freq20_b
-"
+
 
 > CHANGES TO HISTOGRAMS: figure out a way to make the plots themselves larger in the combined image 
 - final check - sent to j and make sure that he can run this on his computer 
