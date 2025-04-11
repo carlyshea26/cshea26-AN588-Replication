@@ -274,7 +274,7 @@ Supplemental Figure:
 ```{r}
 # Model validation figures - Figure 3 - figure supplement 1
 
-par(mfrow = c(3, 3))
+fig_3_1 <- par(mfrow = c(3, 3))
 
 INI_lm <- read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
 LM_ini <- lm(Ave_INI ~ year, data=INI_lm)
@@ -313,7 +313,6 @@ hist(LM_20_EAR$resid, main="Histogram of Residuals", xlab="Residuals",
 qqnorm(LM_20_EAR$resid)
 qqline(LM_20_EAR$resid)
 
-
 HF_lm <- read.csv(file="~/Desktop/DATA/HF_ave.csv", header=TRUE, dec=".")
 HF_LM <- lm(Ave_PF ~ year, data=HF_lm)
 
@@ -329,10 +328,22 @@ hist(HF_LM$resid, main="Histogram of Residuals", xlab="Residuals",
 #Q-Q Plot
 qqnorm(HF_LM$resid)
 qqline(HF_LM$resid)
+
+print(fig_3_1)
 ```
+<details>
+<summary>🐋 Side By Side Comparison of my Figure to Paper's </summary>
+**A Quick Look at the Original Paper's Figure:** 
+```{r}
+#Comparing it to the paper's supplemenatry figure 3.1:
+paper_plot <- "~/Desktop/DATA/figsup1paper.png"
+paper_plot <- readPNG(paper_plot) #reading my image in PNG format and converting it to an array/matrix
+grid.raster(paper_plot)
+```
+</details>
 
 
-
+## Figure 4: Histograms!
 ```{r}
 #Fig.4 : Histograms of all INI measurements from the same singing season
 ini_all<-read.csv(file="~/Desktop/DATA/INI_all.csv", header=TRUE, dec=".")
