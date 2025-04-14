@@ -22,6 +22,16 @@ options(warn=-1)
   <img src="/Users/carlymcdermott/Desktop/DATA/finwhale.png" alt="Centered Image" width="500">
 </div>
 
+
+## Introduction
+> Copy other replication assignments included as a reference
+
+## Summary of All CSV Files Used in This Replication Assignment
+> Add definitions for things like: 
+- INI: 
+- AR:
+- ONA
+
 ## Loading Required Packages
 ```{r}
 library(ggplot2)
@@ -179,7 +189,7 @@ grid.arrange(
 
 ## Figure 3
 ```{r}
-#Figure 3A: INI gradient from 2006 to 2020 for all locations and regions
+# Figure 3A: INI gradient from 2006 to 2020 for all locations and regions
 bout0620<-read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
 
 bout0620$date <-as.Date(bout0620$date, format = "%d/%m/%Y")
@@ -210,11 +220,11 @@ print(ini_b_0620)
 
 ```{r}
 #Fig. 3B: Gradient of the peak frequency of the 20Hz only for EAR data
-EARs<-subset(bout0620, Location=="Azores" | Location=="Gorringe")
+EARs <- subset(bout0620, Location=="Azores" | Location=="Gorringe")
 
-EARs<-read.csv(file="~/Desktop/DATA/20Hz_ave_EARs.csv", header=TRUE, dec=".")
+EARs <- read.csv(file="~/Desktop/DATA/20Hz_ave_EARs.csv", header=TRUE, dec=".")
 
-EARs$date <-as.Date(EARs$date, format = "%d/%m/%Y")
+EARs$date <- as.Date(EARs$date, format = "%d/%m/%Y")
 freq20_b_EAR <- ggplot(EARs, aes(x = date, y = Ave_PF, color= Region)) +
   geom_point(size=2, aes(group=1))+
   geom_errorbar(aes(ymin=Ave_PF-SD_PF, ymax=Ave_PF+SD_PF),width=30) +
@@ -237,8 +247,10 @@ freq20_b_EAR <- ggplot(EARs, aes(x = date, y = Ave_PF, color= Region)) +
 print(freq20_b_EAR)
 ```
 
+Figure 3C: 
+> carly; provide summary of what you're looking at here 
 ```{r}
-#FIGURE 3C:
+# Figure 3C:
 HF<-read.csv(file="~/Desktop/DATA/HF_ave.csv", header=TRUE, dec=".")
 HF$date <-as.Date(HF$date, format = "%d/%m/%Y")
 
@@ -269,8 +281,8 @@ HF_b
 > Carly: How can i create a chunk to concatenate these three subfigures together 
 - Confirm if titles for each subfigure actually represent the correct figures themselves
 
-Supplemental Figure: 
-## Linear Models
+## Supplemental Figure 
+### Linear Models / Model validation figures
 ```{r}
 # Model validation figures - Figure 3 - figure supplement 1
 
@@ -279,23 +291,23 @@ fig_3_1 <- par(mfrow = c(3, 3))
 INI_lm <- read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
 LM_ini <- lm(Ave_INI ~ year, data=INI_lm)
 
-#Spend x Residuals Plot
+# Spend x Residuals Plot
 plot(LM_ini$resid~INI_lm$Ave_INI[order(INI_lm$Ave_INI)],
      main="Internote intervals(INIs)x Residuals\nfor Simple Regression",
      xlab="INIs", ylab="Residuals")
 abline(h=0,lty=2)
 
-#Histogram of Residuals
+# Histogram of Residuals
 hist(LM_ini$resid, main="Histogram of Residuals", xlab="Residuals",
      ylab="Observations")
 
-#Q-Q Plot
+# Q-Q Plot
 qqnorm(LM_ini$resid)
 qqline(LM_ini$resid)
 
 # Repeating this process for 20 Hz note frequencies
 EAR <- read.csv(file="~/Desktop/DATA/20Hz_ave_EARs.csv", header=TRUE, dec=".")
-LM_20_EAR<-lm(Ave_PF ~ year, data=EAR)
+LM_20_EAR <- lm(Ave_PF ~ year, data=EAR)
 summary(LM_20_EAR)
 
 # Spend x Residuals Plot
@@ -308,7 +320,7 @@ abline(h=0,lty=2)
 hist(LM_20_EAR$resid, main="Histogram of Residuals", xlab="Residuals",
      ylab="Observations")
 
-#Q-Q Plot
+# Q-Q Plot
 qqnorm(LM_20_EAR$resid)
 qqline(LM_20_EAR$resid)
 
@@ -320,27 +332,27 @@ plot(HF_LM$resid~HF_lm$Ave_PF[order(HF_lm$Ave_PF)], #originally had this as Ave_
      xlab="INIs", ylab="Residuals")
 abline(h=0,lty=2)
 
-#Histogram of Residuals
+# Histogram of Residuals
 hist(HF_LM$resid, main="Histogram of Residuals", xlab="Residuals",
      ylab="Observations")
 
-#Q-Q Plot
+# Q-Q Plot
 qqnorm(HF_LM$resid)
 qqline(HF_LM$resid)
 
 print(fig_3_1)
 ```
 <details>
-<summary>🐋 Comparison to the Paper's Figure </summary>
+<summary>🐋 **CLICK HERE** for a Comparison to the Paper's Figure </summary>
 **A Quick Look at the Original Paper's Figure:** 
 ```{r}
-# Paper's supplementary figure 3.1:
+# paper's supplementary figure 3.1:
 paper_plot <- "~/Desktop/DATA/figsup1paper.png"
 paper_plot <- readPNG(paper_plot) #reading my image in PNG format and converting it to an array/matrix
 grid.raster(paper_plot)
 ```
-From how they both compare side by side, my plot vs. the plot featured in the paper appear very similar. I didn't have a lot of issues with this step as it was just a combination of histograms, q-q plots, and regressions.
 
+From how they both compare side by side, my plot vs. the plot featured in the paper appear very similar. I didn't have a lot of issues with this step as it was just a combination of histograms, q-q plots, and regressions.
 </details>
 
 ## Figure 4: Histograms!
@@ -459,8 +471,9 @@ ini1718_g <- ggplot(ini1718, aes(INI, fill=Region)) +
   scale_fill_manual(values=c( "darkviolet", "darkblue"))
 ```
 
+
 <details>
-<summary>🐋 CLICK HERE To View The Individual Histograms </summary>
+<summary>🐋 **CLICK HERE** To View The Individual Histograms </summary>
 **Figure 4 Histograms:**
 ```{r}
 print(ini0607_g) #2006/2007
@@ -472,7 +485,8 @@ print(ini1718_g) #2017/2018
 ```
 </details>
 
-Combining All Histograms Together In Single Plot
+
+### Combining All Histograms Together In Single Plot
 ```{r}
 ggarrange(ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g,
           ncol = 2, nrow = 3,
@@ -485,10 +499,10 @@ ggarrange(ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g,
 
 ```{r}
 #Fig 3B: Histograms of all peak frequencies of the HF note from the same singing season
-hf_all<-read.csv(file="~/Desktop/DATA/HF_all.csv", header=TRUE, dec=".")
+hf_all <- read.csv(file="~/Desktop/DATA/HF_all.csv", header=TRUE, dec=".")
 
 #2015/2016
-hf1516<-subset(hf_all, year2=="2015/2016") #wrong column labeled in original datafile
+hf1516 <- subset(hf_all, year2=="2015/2016") #wrong column labeled in original datafile
 
 hf1516_g <- ggplot(hf1516, aes(Peak_Freq, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=18) +
@@ -508,7 +522,7 @@ hf1516_g <- ggplot(hf1516, aes(Peak_Freq, fill=Region)) +
 hf1516_g
 
 #2016/2017
-hf1617<-subset(hf_all, year2=="2016/2017")
+hf1617 <- subset(hf_all, year2=="2016/2017")
 hf1617_g <- ggplot(hf1617, aes(Peak_Freq, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=15) +
   theme_bw() +  
@@ -527,7 +541,7 @@ hf1617_g <- ggplot(hf1617, aes(Peak_Freq, fill=Region)) +
 hf1617_g
 
 #2017/2018
-hf1718<-subset(hf_all, year2=="2017/2018")
+hf1718 <- subset(hf_all, year2=="2017/2018")
 hf1718_g <- ggplot(hf1718, aes(Peak_Freq, fill=Region)) +
   geom_histogram(color="black", alpha=0.5, bins=15) +
   theme_bw() +  
@@ -552,14 +566,14 @@ grid.arrange(hf1516_g, hf1617_g, hf1718_g,
 ```
 
 
-Wilcox Pairwise Comparisons !! Test OBS - EARS
+### Wilcox Pairwise Comparisons !! Test OBS - EARS
+Supplementary material: Test OBS (ocean bottom seismometer) - EARS (Ecologic Acoustic Recorders)
 ```{r}
-# Supplementary material: Test OBS - EARS
-# Wilcox test for pairwise comparisons
+# wilcox test for pairwise comparisons
 library (coin)
 library(rstatix) #loading required packages
 
-test <-read.csv(file="~/Desktop/DATA/test_ear_obs.csv", header=TRUE, dec=".")
+test <- read.csv(file="~/Desktop/DATA/test_ear_obs.csv", header=TRUE, dec=".")
 median(test$INI_ear)
 median (test$INI_obs)
 median(test$Peak_freq_ear)
@@ -571,13 +585,13 @@ ini_test
 freq_test <- wilcox.test(test$Peak_freq_ear, test$Peak_freq_obs, paired=TRUE)
 freq_test
 ```
-> CARLYL ADD INTERPRETATION HERE
+> CARLY ADD INTERPRETATION HERE
 
-
+## Figure Supplement 2 (Extension of Figure 3) - Averaged peak frequencies of the 20-Hz notes per song from all data
 ```{r}
-#Figure supplement 2: Averaged peak frequencies of the 20-Hz notes per song from all data
-bout99<-read.csv(file="~/Desktop/DATA/PF_ave_all.csv", header=TRUE, dec=".")
-bout99$date <-as.Date(bout99$date, format = "%d/%m/%Y")
+# Averaged peak frequencies of the 20-Hz notes per song from all data
+bout99 <- read.csv(file="~/Desktop/DATA/PF_ave_all.csv", header=TRUE, dec=".")
+bout99$date <- as.Date(bout99$date, format = "%d/%m/%Y")
 
 freq20_b <- ggplot(bout99, aes(x = date, y = Ave_PF, color = Region, shape = Recorder)) +
   geom_point(size = 2, bg = "black", lwd = 2, aes(group = 1)) +
@@ -617,12 +631,14 @@ print(freq20_b)
 ```
 
 
-
 > CHANGES TO HISTOGRAMS: figure out a way to make the plots themselves larger in the combined image 
 - final check - sent to j and make sure that he can run this on his computer 
 - make notes collapseable so you're taking up less space in final presentation 
 - label all figures A B etc like u did with figure 1
 - include introduction information / brief methods section 
+- change color of drop down boxes to white to make them easier to see
 - End with your critiques and opinions of the overall paper 
-- idk if i want to recreate the table showing parameters they looked at - ask j his opinion on how to make this 
+- add interpretation for wilcox test
+- break up figure 3 into figure 3 a b c sections 
+second set of histograms for figure 4 - make axes sizes smaller 
 
