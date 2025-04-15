@@ -33,16 +33,14 @@ knitr::opts_chunk$set(echo = TRUE)
 options(warn=-1)
 ```
 
-
 <div align="center">
-  <img src="/Users/carlymcdermott/Desktop/DATA/finwhale.png" alt="Centered Image" width="500">
+  <img src= "/Users/carlymcdermott/Desktop/DATA/finwhale.png" alt="Centered Image" width="500">
 </div>
 
 
 ## Introduction
-> Copy other replication assignments included as a reference
 
-## Summary of All CSV Files Used in This Replication Assignment
+## Summary of CSV Files/Terms
 > Add definitions for things like: 
 - INI: 
 - AR:
@@ -50,37 +48,36 @@ options(warn=-1)
 
 ## Loading Required Packages
 ```{r}
-library(ggplot2)
-library(dplyr)
-library(datasets)
-library(RColorBrewer)
-library(ggplot2)
-library(tibble)
-library(ggpubr)
-library(gridExtra)
-library(FSA)
-library(ggthemes)
-if (!require("gplots", quietly = TRUE)) {
-  install.packages("gplots", dependencies = TRUE)
-}
-library(gplots)
-
-if (!require("RColorBrewer", quietly = TRUE)) {
-  install.packages("RColorBrewer", dependencies = TRUE)
-}
-library(RColorBrewer)
-library (dendextend)
-library(grid)
-library(gtable)
-library(ggprism)
-library(ggimage)
-library(png)
-library(grid)
+suppressPackageStartupMessages({ #ignore this initial function (performing this to hide loading messages from running project)
+  library(ggplot2)
+  library(dplyr)
+  library(datasets)
+  library(RColorBrewer)
+  library(tibble)
+  library(ggpubr)
+  library(gridExtra)
+  library(FSA)
+  library(ggthemes)
+  if (!require("gplots", quietly = TRUE)) {
+    install.packages("gplots", dependencies = TRUE)
+  }
+  library(gplots)
+  if (!require("RColorBrewer", quietly = TRUE)) {
+    install.packages("RColorBrewer", dependencies = TRUE)
+  }
+  library(RColorBrewer)
+  library(dendextend)
+  library(grid)
+  library(gtable)
+  library(ggprism)
+  library(ggimage)
+  library(png)
+})
 ```
 
-Special Case for "gganimate"
+Special Case for "gganimate":
 ```{r}
-# in order to install this final package, it's dependent on already having the packages "ggplot2", "gifski", and "transformr" installed (do this first)
+# in order to install this final package, it's dependent on already having the packages "ggplot2", "gifski", and "transformr" installed
 library(ggplot2)
 library(gifski)
 library(transformr)
@@ -90,7 +87,7 @@ library(patchwork)
 
 ## Figure 1
 ### Figure 1A 
-**R was not used to generate figure 1A for the paper, I am inserting it here**
+**R was not used to generate figure 1A for the paper, I am inserting it here:**
 ```{r}
 # loading the image (a screenshot i took)
 image1a <- "~/Desktop/DATA/fig1A.png"
@@ -114,15 +111,17 @@ print(img1a)
 </details>
 
 ### Figure 1B 
+- Loading CSV File Used for Figure 1B: **Perc_SE_songs**
+- This CSV contains all the percentages of each INI (inter-note-interval) type from 1999 to 2005 at the southeast (SE) location of the Oceanic Northeast Atlantic (ONA) region.
 ```{r}
 # Figure 1B: INI percentage song type in South East location from the ONA region
-perc_SE<-read.csv(file="~/Desktop/DATA/Perc_SE_songs.csv", header=TRUE, dec=".")
+perc_SE <- read.csv(file="~/Desktop/DATA/Perc_SE_songs.csv", header=TRUE, dec=".")
 str(perc_SE)
 perc_SE$INI <- factor(perc_SE$INI, levels = c("19s", "Hyb", "12s"))
 
 # "Make sure perc and Rythm are in the correct format" - but this is wrong (Ry)
 perc_SE$perc <- as.numeric(perc_SE$perc)
-perc_SE$INI <- factor(perc_SE$INI) #no column in the file that has rhythm in it - changed original rhythm to INI?
+perc_SE$INI <- factor(perc_SE$INI) # no column in the file that has rhythm in it - changed original rhythm to INI?
 # there could be a relationship between INI and rhythm in this context (they very well could represent the same thing)...however... i think that this should be clearer either in their readme file or in their actual methods outlining how they analyzed this portion of their study via R 
 # why you might ask? because i spent 2 hours trying to troubleshoot using the "Rhythm" variable when it simply did not exist in the original CV file
 
@@ -154,25 +153,25 @@ print(perc) #printing the figure (sanity check)
 ```
 
 ### Figure 1C
-Loading CSV File Used for Figure 1C: INI_ave_see_99_05.csv
-- contains all INIs(inter-note-intervals) averaged by song collected from 1999 to 2005 at the SE location of the ONA region.
+- Loading CSV File Used for Figure 1C: **INI_ave_see_99_05.csv**
+- This CSV contains all INI's (inter-note-intervals) averaged by song collected from 1999 to 2005 at the SE location of the ONA region.
 ```{r}
-bout9905<-read.csv(file="~/Desktop/DATA/INI_ave_SE_99_05.csv", header=TRUE, dec=".")
+bout9905 <- read.csv(file="~/Desktop/DATA/INI_ave_SE_99_05.csv", header=TRUE, dec=".")
 bout9905$date <- as.Date(bout9905$date, format = "%d/%m/%Y")
 str(bout9905$date)  # ensuring we now have the date format
-head(bout9905$date) #printing data to see how it looks 
+head(bout9905$date) # printing data to see how it looks 
 ```
 
 ```{r}
-#Figure 1C: INI's collected from 1999 to 2005 from the ONA region
-ini_b_9905 <- ggplot(bout9905, aes(x = date, y = Ave_INI)) + #plotting date against average INI for the ONA region
+# also part of figure 1C (INI's collected from 1999 to 2005 from the ONA region)
+ini_b_9905 <- ggplot(bout9905, aes(x = date, y = Ave_INI)) + # plotting date against average INI for the ONA region
   geom_point(size=2, aes(group=1), color="darkblue")+
   geom_errorbar(aes(ymin=Ave_INI-SD_INI, ymax=Ave_INI+SD_INI),width=2, color="darkblue") +
   scale_y_continuous(name = "Average song INI (s)",
-                     limits=c(9, 20), guide = guide_prism_minor()) + theme_bw() +  labs(tag = "C") + #setting limits so that my figure doesn't look crazy
+                     limits=c(9, 20), guide = guide_prism_minor()) + theme_bw() +  labs(tag = "C") + # setting limits so that my figure doesn't look crazy
   scale_x_date(breaks="6 month", date_labels="%b %y")
 
-#formatting axes titles and plot details
+# formatting axes titles and plot details
 ini_b_9905 <- ini_b_9905 + theme(plot.title = element_text(size = 18, family = "Times", face = "bold"),
         text=element_text(family = "Times"),panel.grid.major.y = element_line(colour="black", linetype=2), 
         panel.grid.minor = element_blank(), panel.grid.major.x = element_line(colour="black", linetype=2), strip.text.x = element_text(size = 10, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
@@ -185,7 +184,7 @@ ini_b_9905 <- ini_b_9905 + theme(plot.title = element_text(size = 18, family = "
 print(ini_b_9905)
 ```
 ```{r}
-#Arranging Figure Sections A-C in 1 to Compare to the Actual Study's Figure 1
+# arranging figure 1 sections A-C to compare to the actual study's figure 1
 grid.arrange(
   arrangeGrob(img1a, perc, ncol = 2),  
   ini_b_9905,                          
@@ -193,22 +192,30 @@ grid.arrange(
   heights = c(1, 0.8)  
 )
 ```
+<details>
+<summary>🐋 CLICK HERE To View Figure One from the Paper for a Comparison</summary>
+**Figure 1 (A-C)** As Shown in the Paper
+```{r}
+paper_fig1 <- "~/Desktop/DATA/fig1paperversion.png"
+paper_fig1 <- readPNG(paper_fig1) #reading my image in PNG format and converting it to an array/matrix
+grid.raster(paper_fig1)
+```
+</details>
 
-
-#Comments Regarding Figure 1:
-- Researchers tried to run this model using a column title called "perc_SEdollarsignRythm", which does not exist and is not found anywhere else in the above code. I renamed this to the column "perc_SEdollarsignINI", which still properly mirrors the 1B figure in the original paper. I believe this was just a naming mishap that could have arisen from their end
-
-> Carly: need to do some final formatting changes associated with Figure One - also insert image created by researchers
-- structure your note that you add so it doesnt start in the middle of Figure 1A
-> Fix first image you tried to insert for your intro - or push it to your repository so that all images there are present and its easier to render
-
+**Comments Regarding Figure 1:**
+- Researchers tried to run this model using a column title called "perc_SEdollarsignRythm", which does not exist and is not found anywhere else in the above code. I renamed this to the column "perc_SEdollarsignINI", which still properly mirrors the 1B figure in the original paper
+- I believe this was just a naming mishap that could have arisen from their end.
 
 ## Figure 3
-```{r}
-# Figure 3A: INI gradient from 2006 to 2020 for all locations and regions
-bout0620<-read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
+- Observing gradual changes in song INIs and notes frequencies
 
-bout0620$date <-as.Date(bout0620$date, format = "%d/%m/%Y")
+### Figure 3A: 
+- Loading CSV File Used for Figure 1C: **INI_ave_06_20.csv**
+- This CSV contains all contains all INI's (inter-note-intervals) averaged by song collected from 2006 to 2020 and sorted by location, region and year.
+```{r}
+# figure 3A: sorted INI gradient from 2006 to 2020 for all locations and regions
+bout0620 <- read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
+bout0620$date <- as.Date(bout0620$date, format = "%d/%m/%Y")
 
 ini_b_0620 <- ggplot(bout0620, aes(x = date, y = Ave_INI, color= Region)) +
   geom_point(size=2, aes(group=1))+
@@ -234,41 +241,51 @@ ini_b_0620 <- ggplot(bout0620, aes(x = date, y = Ave_INI, color= Region)) +
 print(ini_b_0620)
 ```
 
+### Figure 3B: 
+- Loading CSV File Used for Figure 1C: **20Hz_ave_EARs.csv**
+- This CSV contains all contains all INI's (inter-note-intervals) averaged by song collected from 2006 to 2020 and sorted by location, region and year.
 ```{r}
-#Fig. 3B: Gradient of the peak frequency of the 20Hz only for EAR data
-EARs <- subset(bout0620, Location=="Azores" | Location=="Gorringe")
-
-EARs <- read.csv(file="~/Desktop/DATA/20Hz_ave_EARs.csv", header=TRUE, dec=".")
+# figure 3B: gradient of the peak frequency of the 20Hz only for EAR data
+EARs <- subset(bout0620, Location == "Azores" | Location == "Gorringe")
+EARs <- read.csv(file = "~/Desktop/DATA/20Hz_ave_EARs.csv", header = TRUE, dec = ".")
 
 EARs$date <- as.Date(EARs$date, format = "%d/%m/%Y")
-freq20_b_EAR <- ggplot(EARs, aes(x = date, y = Ave_PF, color= Region)) +
-  geom_point(size=2, aes(group=1))+
-  geom_errorbar(aes(ymin=Ave_PF-SD_PF, ymax=Ave_PF+SD_PF),width=30) +
-  scale_y_continuous(name = "20-Hz note peak frequency (Hz)",
-                     limits=c(18, 25)) + 
-  theme_bw() +  
-  scale_x_date (breaks="1 year", date_labels="%Y")+
-  theme(plot.title = element_text(size = 18, family = "Times", face = "bold"),
-        text=element_text(family = "Times"),panel.grid.major.y = element_line(colour="black", linetype=2), 
-        panel.grid.minor = element_blank(),panel.grid.major.x = element_line(colour="black", linetype=2),
-        strip.text.x = element_text(size = 18, face="bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
-        strip.background = element_rect(fill="grey97"),
-        axis.title = element_text(face="bold", size = 20),
-        axis.title.x = element_blank(),
-        axis.text.x = element_text(colour="black", size = 20, vjust=0.5, angle=90),
-        axis.text.y = element_text(colour="black", size = 20), legend.position = "top", 
-        legend.text=element_text(size=16), legend.title=element_blank()) +
-  scale_color_manual(values=c("red", "darkblue")) +
-  stat_smooth(method = "glm",aes(group=1), colour = "black", fill= "grey", size=0.5)
+
+freq20_b_EAR <- ggplot(EARs, aes(x = date, y = Ave_PF, color = Region)) +
+  geom_point(size = 2, aes(group = 1)) +
+  geom_errorbar(aes(ymin = Ave_PF - SD_PF, ymax = Ave_PF + SD_PF), width = 30) +
+  scale_y_continuous(name = "20-Hz note peak frequency (Hz)", limits = c(18, 25)) +
+  theme_bw() +
+  scale_x_date(breaks = "1 year", date_labels = "%Y") +
+  theme(
+    plot.title = element_text(size = 18, family = "Times", face = "bold"),
+    text = element_text(family = "Times"),
+    panel.grid.major.y = element_line(colour = "black", linetype = 2),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(colour = "black", linetype = 2),
+    strip.text.x = element_text(size = 18, face = "bold", margin = margin(0.5, 0, 0.5, 0, "cm")),
+    strip.background = element_rect(fill = "grey97"),
+    axis.title = element_text(face = "bold", size = 20),
+    axis.title.x = element_blank(),
+    axis.text.x = element_text(colour = "black", size = 20, vjust = 0.5, angle = 90),
+    axis.text.y = element_text(colour = "black", size = 20),
+    legend.position = "top",
+    legend.text = element_text(size = 16),
+    legend.title = element_blank()
+  ) +
+  scale_color_manual(values = c("red", "darkblue")) +
+  stat_smooth(method = "glm", aes(group = 1), colour = "black", fill = "grey", linewidth = 0.5)
+
 print(freq20_b_EAR)
 ```
 
-Figure 3C: 
-> carly; provide summary of what you're looking at here 
+### Figure 3C: 
+- Loading CSV File Used for Figure 1C: **HF_ave.csv**
+- This CSV contains peak frequencies of the high frequency (HF) note averaged by song (also includes standard deviations sorted by location, region and year). 
 ```{r}
-# Figure 3C:
-HF<-read.csv(file="~/Desktop/DATA/HF_ave.csv", header=TRUE, dec=".")
-HF$date <-as.Date(HF$date, format = "%d/%m/%Y")
+# figure 3C:
+HF <- read.csv(file="~/Desktop/DATA/HF_ave.csv", header=TRUE, dec=".")
+HF$date <- as.Date(HF$date, format = "%d/%m/%Y")
 
 HF_b <- ggplot(HF, aes(x = date, y = Ave_PF, color= Region)) +
   geom_point(size=2, aes(group=1))+
@@ -287,33 +304,48 @@ HF_b <- ggplot(HF, aes(x = date, y = Ave_PF, color= Region)) +
         axis.text.x = element_text(colour="black", size = 12, vjust=0.5, angle=90),
         axis.text.y = element_text(colour="black", size = 12), legend.position = "top", 
         legend.text=element_text(size=12), legend.title=element_blank()) +
-  scale_color_manual(values=c("darkviolet", "red", "green4","black","turquoise", "blue")) +
+  scale_color_manual(values=c("darkviolet", "red", "green4","black","turquoise", "darkblue")) +
   #facet_grid(~year2, scale="free_x") 
   stat_smooth(method = "glm",aes(group=1), colour = "black", fill= "grey", lwd=0.5)
-HF_b
+
+print(HF_b)
 ```
 
 
-> Carly: How can i create a chunk to concatenate these three subfigures together 
-- Confirm if titles for each subfigure actually represent the correct figures themselves
+> CARLY - add labels for A-C
 
-## Supplemental Figure 
-### Linear Models / Model validation figures
+<details>
+<summary>🐋 CLICK HERE To View Figure Three from the Paper for a Comparison</summary>
+**Figure 3 (A-C)** As Shown in the Paper
 ```{r}
-# Model validation figures - Figure 3 - figure supplement 1
+paper_fig3 <- "~/Desktop/DATA/paperfig3.png"
+paper_fig3 <- readPNG(paper_fig3) #reading my image in PNG format and converting it to an array/matrix
+grid.raster(paper_fig3)
+```
+</details>
+
+**Comments Regarding Figure 3:** 
+- I didn't run into any errors with trying to run the code to generate these figures and the repetition for running these three made it easier for me to base 3B and 3C directly from the code that I generated for Figure 3A.
+- Still working through how to change the width of my plots within R Markdown but overall I am very happy with how these figures compare to those in the paper itself!
+
+## Supplemental Figure 1 
+### Linear Models / Model Validation
+- I went though and performed really simple linear regression using the lm() function 
+```{r}
+# model validation figures (figure 3 - figure supplement 1)
 
 fig_3_1 <- par(mfrow = c(3, 3))
 
 INI_lm <- read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
 LM_ini <- lm(Ave_INI ~ year, data=INI_lm)
 
-# Spend x Residuals Plot
+# spend x residuals plot
 plot(LM_ini$resid~INI_lm$Ave_INI[order(INI_lm$Ave_INI)],
      main="Internote intervals(INIs)x Residuals\nfor Simple Regression",
      xlab="INIs", ylab="Residuals")
 abline(h=0,lty=2)
 
-# Histogram of Residuals
+# histogram of Residuals
 hist(LM_ini$resid, main="Histogram of Residuals", xlab="Residuals",
      ylab="Observations")
 
@@ -321,18 +353,18 @@ hist(LM_ini$resid, main="Histogram of Residuals", xlab="Residuals",
 qqnorm(LM_ini$resid)
 qqline(LM_ini$resid)
 
-# Repeating this process for 20 Hz note frequencies
+# repeating this process for 20 Hz note frequencies
 EAR <- read.csv(file="~/Desktop/DATA/20Hz_ave_EARs.csv", header=TRUE, dec=".")
 LM_20_EAR <- lm(Ave_PF ~ year, data=EAR)
 summary(LM_20_EAR)
 
-# Spend x Residuals Plot
-plot(LM_20_EAR$resid~EAR$Ave_PF[order(EAR$Ave_PF)],
+# spend x residuals plot
+plot(LM_20_EAR$resid ~ EAR$Ave_PF[order(EAR$Ave_PF)],
      main="20-Hz note peak frequency x Residuals\nfor Simple Regression",
      xlab="INIs", ylab="Residuals")
 abline(h=0,lty=2)
 
-# Histogram of Residuals
+# histogram of residuals
 hist(LM_20_EAR$resid, main="Histogram of Residuals", xlab="Residuals",
      ylab="Observations")
 
@@ -373,7 +405,7 @@ From how they both compare side by side, my plot vs. the plot featured in the pa
 
 ## Figure 4: Histograms!
 ```{r}
-#Figure 4: Histograms of all INI measurements from the same singing season, for the actual individual graphs please click on the dropdown below this chunk!
+#Figure 4: Histograms of all INI measurements from the same singing season, for the actual individual graphs please click on the drop-down below this chunk!
 
 ini_all<-read.csv(file="~/Desktop/DATA/INI_all.csv", header=TRUE, dec=".")
 
@@ -487,7 +519,6 @@ ini1718_g <- ggplot(ini1718, aes(INI, fill=Region)) +
   scale_fill_manual(values=c( "darkviolet", "darkblue"))
 ```
 
-
 <details>
 <summary>🐋 **CLICK HERE** To View The Individual Histograms </summary>
 **Figure 4 Histograms:**
@@ -506,15 +537,14 @@ print(ini1718_g) #2017/2018
 ```{r}
 ggarrange(ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g,
           ncol = 2, nrow = 3,
-          align = "v",  # vertical alignment
-          labels = NULL,  # or use labels = c("A", "B", ...)
+          align = "v",  # allows you to align this vertically
+          labels = NULL,
           heights = c(1, 1, 1))
 ```
-
-> CARLY: INCLUDE LEGENDS HERE
-
+<details>
+<summary>🐋 CLICK HERE To View Figure 4B's Histograms </summary>
 ```{r}
-#Fig 3B: Histograms of all peak frequencies of the HF note from the same singing season
+#Fig 4B: histograms of all peak frequencies of the HF note from the same singing season
 hf_all <- read.csv(file="~/Desktop/DATA/HF_all.csv", header=TRUE, dec=".")
 
 #2015/2016
@@ -580,12 +610,16 @@ grid.arrange(hf1516_g, hf1617_g, hf1718_g,
              widths = 2, 
              heights = c(2, 2, 2))
 ```
+</details>
 
+### Supplementary Material
 
-### Wilcox Pairwise Comparisons !! Test OBS - EARS
+Wilcox Pairwise Comparisons !! 
+
+Test OBS - EARS
 Supplementary material: Test OBS (ocean bottom seismometer) - EARS (Ecologic Acoustic Recorders)
 ```{r}
-# wilcox test for pairwise comparisons
+# Wilcox test for pairwise comparisons
 library (coin)
 library(rstatix) #loading required packages
 
@@ -603,7 +637,9 @@ freq_test
 ```
 > CARLY ADD INTERPRETATION HERE
 
-## Figure Supplement 2 (Extension of Figure 3) - Averaged peak frequencies of the 20-Hz notes per song from all data
+
+## Figure Supplement 2 
+- Extension of Figure 3: Averaged peak frequencies of the 20-Hz notes per song from all data
 ```{r}
 # Averaged peak frequencies of the 20-Hz notes per song from all data
 bout99 <- read.csv(file="~/Desktop/DATA/PF_ave_all.csv", header=TRUE, dec=".")
@@ -658,3 +694,4 @@ print(freq20_b)
 - break up figure 3 into figure 3 a b c sections 
 second set of histograms for figure 4 - make axes sizes smaller 
 
+- data was incredibly organized 
