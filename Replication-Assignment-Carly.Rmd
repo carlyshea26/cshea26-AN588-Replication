@@ -4,13 +4,29 @@ author: "Carly S McDermott"
 output:
   html_document:
     theme:
-      bootswatch: minty 
+      bootswatch: journal 
       primary: "#007BFF" 
       bg: "#e1fafc"      
       fg: "#0D47A1"      
     toc: true            
     toc_float: true
 ---
+<style>
+summary {
+  background-color: #007BFF;
+  color: white;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+details {
+  background-color: #e1fafc;
+  padding: 10px;
+  border: 1px solid #007BFF;
+  border-radius: 6px;
+}
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
