@@ -1,5 +1,5 @@
 ---
-title: "Replication Assignment Carly"
+title: "Replication Assignment"
 author: "Carly S McDermott"
 output:
   html_document:
@@ -42,7 +42,8 @@ options(warn=-1)
 Fin whales are one of the many species that produce songs, which are commonly used as acoustic courtship displays. These songs have the potential to change across both time and space, as a result of factors including cultural transmission, genetic drift, or adaptations to new environments. Although the evolution of songs has been thoroughly studied in songbirds, the mechanisms underlying fin whale song variations remain poorly understood. This paper examined alterations in three fin whale song characteristics over two decades in the North Atlantic Ocean (ONA), attempting to elucidate the patterns and factors that influence song evolution in fin whales.
 
 
-**Terms and Abbreviations:**
+## Terms and Abbreviations:
+
 **INI (Inter-Note Interval):** The duration separating successive notes in a whale’s song.
 **20-Hz Note:** A common low-frequency noise (~20 Hz) in fin whales.
 **HF Note:** A higher frequency note (~130 Hz) that may appear with the 20-Hz note.
@@ -55,7 +56,7 @@ Fin whales are one of the many species that produce songs, which are commonly us
 This paper collected acoustic recordings from 15 study sites across the central and eastern North Atlantic (1999-2020). Data gathering was focused on the known fin whale vocalization period (October to March) to account for seasonal changes. Recordings were then analyzed with Raven Pro 1.5 software to assess inter-note intervals (INIs) and peak frequencies of both the 20-Hz and HF notes. Only recordings of high quality with slight background noise and distinct note sequences were chosen for analysis. The temporal and spatial patterns in song features were analyzed in R.
 
 
-## loading required packages
+## Loading required packages
 ```{r}
 suppressPackageStartupMessages({ #ignore this initial function (performing this to hide loading messages from running project)
   library(ggplot2)
@@ -96,7 +97,7 @@ library(patchwork)
 
 ## Figure 1
 ### Figure 1A 
-**R was not used to generate figure 1A for the paper, i am inserting it here:**
+
 ```{r}
 # loading the image (a screenshot i took)
 image1a <- "~/Desktop/DATA/fig1A.png"
@@ -163,7 +164,7 @@ perc <- ggplot(perc_SE, aes(fill=INI, y=perc, x=year)) +
 print(perc) #printing the figure (sanity check)
 ```
 
-### figure 1C
+### Figure 1C
 - loading CSV File Used for Figure 1C: **INI_ave_see_99_05.csv**
 - this CSV contains all INI's (inter-note-intervals) averaged by song collected from 1999 to 2005 at the SE location of the ONA region
 ```{r}
@@ -194,6 +195,7 @@ ini_b_9905 <- ini_b_9905 + theme(plot.title = element_text(size = 18, family = "
         legend.text=element_text(size=10), legend.title=element_blank())
 print(ini_b_9905)
 ```
+### Putting It All Together
 ```{r}
 # arranging figure 1 sections A-C to compare to the actual study's figure 1
 grid.arrange(
@@ -203,6 +205,7 @@ grid.arrange(
   heights = c(1, 0.8)  
 )
 ```
+
 <details>
 <summary>🐋 CLICK HERE To View Figure One from the Paper for a Comparison</summary>
 **Figure 1 (A-C)** As Shown in the Paper
@@ -213,11 +216,13 @@ grid.raster(paper_fig1)
 ```
 </details>
 
+
 **Comments Regarding Figure 1:**
+
 - Researchers tried to run this model using a column title called "perc_SEdollarsignRythm", which does not exist and is not found anywhere else in the above code. I renamed this to the column "perc_SEdollarsignINI", which still properly mirrors the 1B figure in the original paper
 - I believe this was just a naming mishap that could have arisen from their end, but I should have been more diligent about checking the CSV file first
 
-## figure 3
+## Figure 3
 - Observing gradual changes in song INIs and notes frequencies
 
 ### Figure 3A: 
@@ -293,7 +298,7 @@ freq20_b_EAR <- ggplot(EARs, aes(x = date, y = Ave_PF, color = Region)) +
 print(freq20_b_EAR)
 ```
 
-### figure 3C: 
+### Figure 3C: 
 - loading CSV File Used for Figure 1C: **HF_ave.csv**
 - this CSV contains peak frequencies of the high frequency (HF) note averaged by song (also includes standard deviations sorted by location, region and year). 
 ```{r}
@@ -337,17 +342,23 @@ grid.raster(paper_fig3)
 </details>
 
 **Comments Regarding Figure 3:** 
+
 - I didn't run into any errors with trying to run the code to generate these figures and the repetition for running these three made it easier for me to base 3B and 3C directly from the code that I generated for Figure 3A.
 - Still working through how to change the width of my plots within R Markdown but overall I am very happy with how these figures compare to those in the paper itself!
 
 ## Supplemental Figure 1 
-### linear models / model validation
+### Linear Models / Model Validation
 
-I went though and performed a really simple linear regression using the lm() function 
->SPECIFY CSVS USED
+- I went though and performed a really simple linear regression using the lm() function 
+
+CSVs Used for Supplemental Figure 1:
+
+- **"INI_ave_06_20.csv":** contains all INIs averaged by song collected from 2006 to 2020 and sorted by location, region and year 
+- **"20Hz_ave_EARs.csv":** contains INIs and peak frequencies of the 20-Hz note averaged by song (or day) and its standard deviations sorted by location, region and year recorded only with Ecologic Acoustic Recorders (EARs) 
+- **"HF_ave.csv":** contains peak frequencies of the high frequency (HF) note averaged by song (or day) and its standard deviations sorted location, region and year
 
 ```{r}
-# model validation figures (figure 3 - figure supplement 1)
+# model validation figures (figure 3 - supplemental figure 1)
 
 fig_3_1 <- par(mfrow = c(3, 3))
 
@@ -409,7 +420,7 @@ print(fig_3_1)
 <summary>🐋 **CLICK HERE** for a Comparison to the Paper's Figure </summary>
 **A Quick Look at the Original Paper's Figure:** 
 ```{r}
-# paper's supplementary figure 3.1:
+# paper's supplemental figure 3.1:
 paper_plot <- "~/Desktop/DATA/figsup1paper.png"
 paper_plot <- readPNG(paper_plot) #reading my image in PNG format and converting it to an array/matrix
 grid.raster(paper_plot)
@@ -418,10 +429,10 @@ grid.raster(paper_plot)
 From how they both compare side by side, my plot vs. the plot featured in the paper appear very similar. I didn't have a lot of issues with this step as it was just a combination of histograms, q-q plots, and regressions.
 </details>
 
-## Figure 4: Histograms!
+## Figure 4 
 
 - loading CSV file used for Figure 4B: **INI_all.csv**
-- this CSV contains all INIs measured from 1999 to 2020 and sorted by location, region and year
+- this CSV contains all INI's measured from 1999 to 2020 and sorted by location, region and year
 
 ```{r}
 # figure 4: histograms of all INI measurements from the same singing season, for the actual individual graphs please click on the drop-down below this chunk!
@@ -635,10 +646,8 @@ grid.arrange(hf1516_g, hf1617_g, hf1718_g,
 ```
 </details>
 
-### Supplementary Material
-
-Wilcox Pairwise Comparisons !! 
-- basically the non-parametric version of the two-sample t-tes
+## Wilcox Pairwise Comparisons 
+- basically the non-parametric version of the two-sample t-test
 
 Testing OBS (ocean bottom seismometer) vs. EARS (Ecologic Acoustic Recorders):
 - loading CSV File Used for the Wilcox Test: **test_ear_obs.csv**
@@ -660,11 +669,10 @@ ini_test
 freq_test <- wilcox.test(test$Peak_freq_ear, test$Peak_freq_obs, paired=TRUE)
 freq_test 
 ```
-> Interpretation: The alternative hypothesis meniotned here is stated as "true location shift is not equal to 0". Which means that the distribution of one population is shifted left/right (signifies different medians). From this information, we can see that there is a **significant difference** in peak frequency observations (p-value < 2.2e-16) but **no significant difference** in inter-note intervals (INIs) (p-value = 0.4703) between recordings made by either EARS and OBS devices. One possible interpretation from these results may be that these devices may differ in sensitivity to sound. These results suggest that while both devices capture similar temporal patterns (INI), they may differ how they record frequency related information.
+> Interpretation: The alternative hypothesis mentioned here is stated as "true location shift is not equal to 0", which means that the distribution of one population is shifted left/right (signifies different medians). From this information, we can see that there is a **significant difference** in peak frequency observations (p-value < 2.2e-16) but **no significant difference** in inter-note intervals (INIs) (p-value = 0.4703) between recordings made by either EARS and OBS devices. One possible explanation from these results may be that while both devices capture similar temporal patterns (INI), they may differ in how they record frequency related information.
 
-## Figure Supplement 2 
-Extension of Figure 3: Averaged peak frequencies of the 20-Hz notes per song from all data
-
+## Supplemental Figure 2 
+- Extension of Figure 3: Averaged peak frequencies of the 20-Hz notes per song from all data
 - loading CSV File Used for Figure Supplement 2: **PF_ave_all.csv**
 - this CSV contains all 20-Hz note peak frequency measurements averaged per song (or day) and its standard deviations sorted location, region and year 
 ```{r}
@@ -709,15 +717,8 @@ freq20_b <- ggplot(bout99, aes(x = date, y = Ave_PF, color = Region, shape = Rec
 print(freq20_b)
 ```
 
-> 
-- label all figures A B etc like u did with figure 1
-- change color of drop down boxes to white to make them easier to see
-- break up figure 3 into figure 3 a b c sections 
-second set of histograms for figure 4 - make axes sizes smaller 
-add info on csvs used for ## Supplemental Figure 1 
-
 # Results/Conclusions
 In the first decade following initial data collection, researchers observed gradual shifts in inter-note intervals (INIs) and peak frequencies of both the 20-Hz and HF notes, indicating continued song evolution. In short, the key takeaway from this paper is that the combination of both gradual and rapid changes in song parameters across the central and eastern North Atlantic provides compelling evidence for vocal learning in fin whales!
 
-# My Takeaways:
-Overall this code was easy to follow in order to create the figures for this paper. The ReadMe file was very well organized and I really appreciated how the research team defined all of the csv files used alongside each of the columns within the files. 
+# My Takeaways
+Overall this code was easy to follow in order to create the figures for this paper. The README file was very organized and I really appreciated how the research team defined all of the csv files used alongside each of the columns within the files. 
