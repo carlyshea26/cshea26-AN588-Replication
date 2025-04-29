@@ -38,15 +38,24 @@ options(warn=-1)
 </div>
 
 
-## Introduction
+# Introduction
+Fin whales are one of the many species that produce songs, which are commonly used as acoustic courtship displays. These songs have the potential to change across both time and space, as a result of factors including cultural transmission, genetic drift, or adaptations to new environments. Although the evolution of songs has been thoroughly studied in songbirds, the mechanisms underlying fin whale song variations remain poorly understood. This paper examined alterations in three fin whale song characteristics over two decades in the North Atlantic Ocean (ONA), attempting to elucidate the patterns and factors that influence song evolution in fin whales.
 
-## Summary of CSV Files/Terms
-> Add definitions for things like: 
-- INI: 
-- AR:
-- ONA
 
-## Loading Required Packages
+**Terms and Abbreviations:**
+**INI (Inter-Note Interval):** The duration separating successive notes in a whale’s song.
+**20-Hz Note:** A common low-frequency noise (~20 Hz) in fin whales.
+**HF Note:** A higher frequency note (~130 Hz) that may appear with the 20-Hz note.
+**SNR (Signal-to-Noise Ratio):** An indicator of the clarity of signals in recordings.
+**EAR (Ecological Acoustic Recorder):** A type of autonomous underwater recorder.
+**OBS (Ocean Bottom Seismometer):** A device on the seafloor capable of capturing acoustic information.
+**ONA (Oceanic Northeast Atlantic):** A region encompassing several recording locations in the study.​
+
+# Methods
+This paper collected acoustic recordings from 15 study sites across the central and eastern North Atlantic (1999-2020). Data gathering was focused on the known fin whale vocalization period (October to March) to account for seasonal changes. Recordings were then analyzed with Raven Pro 1.5 software to assess inter-note intervals (INIs) and peak frequencies of both the 20-Hz and HF notes. Only recordings of high quality with slight background noise and distinct note sequences were chosen for analysis. The temporal and spatial patterns in song features were analyzed in R.
+
+
+## loading required packages
 ```{r}
 suppressPackageStartupMessages({ #ignore this initial function (performing this to hide loading messages from running project)
   library(ggplot2)
@@ -75,7 +84,7 @@ suppressPackageStartupMessages({ #ignore this initial function (performing this 
 })
 ```
 
-Special Case for "gganimate":
+Special Case for "gganimate": (according to research team) 
 ```{r}
 # in order to install this final package, it's dependent on already having the packages "ggplot2", "gifski", and "transformr" installed
 library(ggplot2)
@@ -85,9 +94,9 @@ library(gganimate)
 library(patchwork)
 ```
 
-## Figure 1
-### Figure 1A 
-**R was not used to generate figure 1A for the paper, I am inserting it here:**
+## figure 1
+### figure 1A 
+**R was not used to generate figure 1A for the paper, i am inserting it here:**
 ```{r}
 # loading the image (a screenshot i took)
 image1a <- "~/Desktop/DATA/fig1A.png"
@@ -110,20 +119,20 @@ print(img1a)
 **A Note:** I somewhat cheated by inserting the screenshot provided by the initial research team — however, this figure is solely inserted to mimic the original paper's figure one to the best of my ability.
 </details>
 
-### Figure 1B 
-- Loading CSV File Used for Figure 1B: **Perc_SE_songs**
-- This CSV contains all the percentages of each INI (inter-note-interval) type from 1999 to 2005 at the southeast (SE) location of the Oceanic Northeast Atlantic (ONA) region.
+### figure 1B 
+- loading CSV File Used for Figure 1B: **Perc_SE_songs**
+- this CSV contains all the percentages of each INI (inter-note-interval) type from 1999 to 2005 at the southeast (SE) location of the Oceanic Northeast Atlantic (ONA) region
 ```{r}
-# Figure 1B: INI percentage song type in South East location from the ONA region
+# figure 1B: INI percentage song type in South East location from the ONA region
 perc_SE <- read.csv(file="~/Desktop/DATA/Perc_SE_songs.csv", header=TRUE, dec=".")
 str(perc_SE)
 perc_SE$INI <- factor(perc_SE$INI, levels = c("19s", "Hyb", "12s"))
 
-# "Make sure perc and Rythm are in the correct format" - but this is wrong (Ry)
+# note from the original creators to "make sure perc and Rythm are in the correct format" - but this is wrong (Ry)
 perc_SE$perc <- as.numeric(perc_SE$perc)
-perc_SE$INI <- factor(perc_SE$INI) # no column in the file that has rhythm in it - changed original rhythm to INI?
+perc_SE$INI <- factor(perc_SE$INI) # there is no no column in the file that has rhythm in it - this was potentially changed from Ry to INI
 # there could be a relationship between INI and rhythm in this context (they very well could represent the same thing)...however... i think that this should be clearer either in their readme file or in their actual methods outlining how they analyzed this portion of their study via R 
-# why you might ask? because i spent 2 hours trying to troubleshoot using the "Rhythm" variable when it simply did not exist in the original CV file
+# why might we care? because i spent 2 hours trying to troubleshoot using the "Rhythm" variable when it simply did not exist in the original CSV file
 
 perc <- ggplot(perc_SE, aes(fill=INI, y=perc, x=year)) +
   geom_bar(position="fill", stat="identity", width=0.5) +
@@ -140,21 +149,23 @@ perc <- ggplot(perc_SE, aes(fill=INI, y=perc, x=year)) +
         legend.text=element_text(size=10), legend.title=element_blank()) +
   labs(tag = "B") +
   scale_fill_manual(values=c("red","cyan", "springgreen4")) +
-#adding annotation for dashed line in 2001/2002 column
+
+  #adding annotation for dashed line in 2001/2002 column
   geom_segment(aes(x = which(perc_SE$year == "2001/2002")[1], 
                    xend = which(perc_SE$year == "2001/2002")[1], 
                    y = 0.01, yend = 0.99), 
                linetype = "dashed", color = "black") +
 
-#adding annotation for "No Data" (attempting to center it)
+
+  #adding annotation for "No Data" (attempting to center it)
   annotate("text", x = which(perc_SE$year == "2001/2002")[1], y = 0.5, 
            label = "No Data", family = "Times", angle = 90, vjust = -0.5, hjust = .5, size = 4)
 print(perc) #printing the figure (sanity check)
 ```
 
-### Figure 1C
-- Loading CSV File Used for Figure 1C: **INI_ave_see_99_05.csv**
-- This CSV contains all INI's (inter-note-intervals) averaged by song collected from 1999 to 2005 at the SE location of the ONA region.
+### figure 1C
+- loading CSV File Used for Figure 1C: **INI_ave_see_99_05.csv**
+- this CSV contains all INI's (inter-note-intervals) averaged by song collected from 1999 to 2005 at the SE location of the ONA region
 ```{r}
 bout9905 <- read.csv(file="~/Desktop/DATA/INI_ave_SE_99_05.csv", header=TRUE, dec=".")
 bout9905$date <- as.Date(bout9905$date, format = "%d/%m/%Y")
@@ -204,14 +215,14 @@ grid.raster(paper_fig1)
 
 **Comments Regarding Figure 1:**
 - Researchers tried to run this model using a column title called "perc_SEdollarsignRythm", which does not exist and is not found anywhere else in the above code. I renamed this to the column "perc_SEdollarsignINI", which still properly mirrors the 1B figure in the original paper
-- I believe this was just a naming mishap that could have arisen from their end.
+- I believe this was just a naming mishap that could have arisen from their end, but I should have been more diligent about checking the CSV file first
 
-## Figure 3
+## figure 3
 - Observing gradual changes in song INIs and notes frequencies
 
 ### Figure 3A: 
-- Loading CSV File Used for Figure 1C: **INI_ave_06_20.csv**
-- This CSV contains all contains all INI's (inter-note-intervals) averaged by song collected from 2006 to 2020 and sorted by location, region and year.
+- loading CSV File Used for Figure 1C: **INI_ave_06_20.csv**
+- this CSV contains all contains all INI's (inter-note-intervals) averaged by song collected from 2006 to 2020 and sorted by location, region and year
 ```{r}
 # figure 3A: sorted INI gradient from 2006 to 2020 for all locations and regions
 bout0620 <- read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
@@ -220,6 +231,7 @@ bout0620$date <- as.Date(bout0620$date, format = "%d/%m/%Y")
 ini_b_0620 <- ggplot(bout0620, aes(x = date, y = Ave_INI, color= Region)) +
   geom_point(size=2, aes(group=1))+
   geom_errorbar(aes(ymin=Ave_INI-SD_INI, ymax=Ave_INI+SD_INI),width=30) +
+  annotate("text", x = min(bout0620$date), y = 21, label = "A", fontface = "bold", size = 6) +
   scale_y_continuous(name = "Average song INI (s)",
                      limits=c(7.8, 21.5), guide = guide_prism_minor()) + 
   theme_bw() +  
@@ -233,7 +245,7 @@ ini_b_0620 <- ggplot(bout0620, aes(x = date, y = Ave_INI, color= Region)) +
         axis.title.x = element_blank(),
         axis.text.x = element_text(colour="black", size = 15, vjust=0.5, angle=90),
         axis.text.y = element_text(colour="black", size = 15), legend.position = "top", 
-        legend.text=element_text(size=15), legend.title=element_blank()) +
+        legend.text=element_text(size=15), legend.title=element_blank())+
   scale_color_manual(values=c("darkviolet","darkorange","green4", "black","turquoise","darkblue","red" )) +
   #facet_grid(~year3, scale="free_x")
   stat_smooth( method = "glm",aes(group=1), colour = "black", fill= "grey", size=0.5)
@@ -242,8 +254,8 @@ print(ini_b_0620)
 ```
 
 ### Figure 3B: 
-- Loading CSV File Used for Figure 1C: **20Hz_ave_EARs.csv**
-- This CSV contains all contains all INI's (inter-note-intervals) averaged by song collected from 2006 to 2020 and sorted by location, region and year.
+- loading CSV File Used for Figure 1C: **20Hz_ave_EARs.csv**
+- this CSV contains all contains all INI's (inter-note-intervals) averaged by song collected from 2006 to 2020 and sorted by location, region and year
 ```{r}
 # figure 3B: gradient of the peak frequency of the 20Hz only for EAR data
 EARs <- subset(bout0620, Location == "Azores" | Location == "Gorringe")
@@ -254,6 +266,7 @@ EARs$date <- as.Date(EARs$date, format = "%d/%m/%Y")
 freq20_b_EAR <- ggplot(EARs, aes(x = date, y = Ave_PF, color = Region)) +
   geom_point(size = 2, aes(group = 1)) +
   geom_errorbar(aes(ymin = Ave_PF - SD_PF, ymax = Ave_PF + SD_PF), width = 30) +
+  annotate("text", x = min(bout0620$date), y = 24.6, label = "B", fontface = "bold", size = 6) +
   scale_y_continuous(name = "20-Hz note peak frequency (Hz)", limits = c(18, 25)) +
   theme_bw() +
   scale_x_date(breaks = "1 year", date_labels = "%Y") +
@@ -271,6 +284,7 @@ freq20_b_EAR <- ggplot(EARs, aes(x = date, y = Ave_PF, color = Region)) +
     axis.text.y = element_text(colour = "black", size = 20),
     legend.position = "top",
     legend.text = element_text(size = 16),
+    labs(tag = "A"),
     legend.title = element_blank()
   ) +
   scale_color_manual(values = c("red", "darkblue")) +
@@ -405,7 +419,7 @@ From how they both compare side by side, my plot vs. the plot featured in the pa
 
 ## Figure 4: Histograms!
 ```{r}
-#Figure 4: Histograms of all INI measurements from the same singing season, for the actual individual graphs please click on the drop-down below this chunk!
+# figure 4: histograms of all INI measurements from the same singing season, for the actual individual graphs please click on the drop-down below this chunk!
 
 ini_all<-read.csv(file="~/Desktop/DATA/INI_all.csv", header=TRUE, dec=".")
 
@@ -615,33 +629,32 @@ grid.arrange(hf1516_g, hf1617_g, hf1718_g,
 ### Supplementary Material
 
 Wilcox Pairwise Comparisons !! 
+- basically the non-parametric version of the two-sample t-tes
 
-Test OBS - EARS
-Supplementary material: Test OBS (ocean bottom seismometer) - EARS (Ecologic Acoustic Recorders)
+testing OBS (ocean bottom seismometer) vs. EARS (Ecologic Acoustic Recorders)
 ```{r}
-# Wilcox test for pairwise comparisons
+# wilcox test for pairwise comparisons
 library (coin)
 library(rstatix) #loading required packages
 
-test <- read.csv(file="~/Desktop/DATA/test_ear_obs.csv", header=TRUE, dec=".")
-median(test$INI_ear)
+test <- read.csv(file="~/Desktop/DATA/test_ear_obs.csv", header=TRUE, dec=".") #loading data
+median(test$INI_ear) 
 median (test$INI_obs)
 median(test$Peak_freq_ear)
-median (test$Peak_freq_obs)
+median (test$Peak_freq_obs) #looking at medians for the populations studied
 
 ini_test <- wilcox.test(test$INI_ear, test$INI_obs, paired=TRUE)
 ini_test
 
 freq_test <- wilcox.test(test$Peak_freq_ear, test$Peak_freq_obs, paired=TRUE)
-freq_test
+freq_test 
 ```
-> CARLY ADD INTERPRETATION HERE
-
+> Interpretation: The alternative hypothesis meniotned here is stated as "true location shift is not equal to 0". Which means that the distribution of one population is shifted left/right (signifies different medians). From this information, we can see that there is a **significant difference** in peak frequency observations (p-value < 2.2e-16) but **no significant difference** in inter-note intervals (INIs) (p-value = 0.4703) between recordings made by either EARS and OBS devices. One possible interpretation from these results may be that these devices may differ in sensitivity to sound. These results suggest that while both devices capture similar temporal patterns (INI), they may differ how they record frequency related information.
 
 ## Figure Supplement 2 
 - Extension of Figure 3: Averaged peak frequencies of the 20-Hz notes per song from all data
 ```{r}
-# Averaged peak frequencies of the 20-Hz notes per song from all data
+# averaged peak frequencies of the 20-Hz notes per song (from all data)
 bout99 <- read.csv(file="~/Desktop/DATA/PF_ave_all.csv", header=TRUE, dec=".")
 bout99$date <- as.Date(bout99$date, format = "%d/%m/%Y")
 
@@ -682,16 +695,14 @@ freq20_b <- ggplot(bout99, aes(x = date, y = Ave_PF, color = Region, shape = Rec
 print(freq20_b)
 ```
 
-
-> CHANGES TO HISTOGRAMS: figure out a way to make the plots themselves larger in the combined image 
-- final check - sent to j and make sure that he can run this on his computer 
-- make notes collapseable so you're taking up less space in final presentation 
+> 
 - label all figures A B etc like u did with figure 1
-- include introduction information / brief methods section 
 - change color of drop down boxes to white to make them easier to see
-- End with your critiques and opinions of the overall paper 
-- add interpretation for wilcox test
 - break up figure 3 into figure 3 a b c sections 
 second set of histograms for figure 4 - make axes sizes smaller 
 
-- data was incredibly organized 
+# Results/Conclusions
+In the first decade following initial data collection, researchers observed gradual shifts in inter-note intervals (INIs) and peak frequencies of both the 20-Hz and HF notes, indicating continued song evolution. In short, the key takeaway from this paper is that the combination of both gradual and rapid changes in song parameters across the central and eastern North Atlantic provides compelling evidence for vocal learning in fin whales!
+
+# My Takeaways:
+Overall this code was easy to follow in order to create the figures for this paper. The ReadMe file was very well organized and I really appreciated how the research team defined all of the csv files used alongside each of the columns within the files. 
