@@ -34,7 +34,7 @@ options(warn=-1)
 ```
 
 <div align="center">
-  <img src= "/Users/carlymcdermott/Desktop/DATA/finwhale.png" alt="Centered Image" width="500">
+  <img src= "/Users/carlymcdermott/Desktop/img/finwhale.png" alt="Centered Image" width="500">
 </div>
 
 
@@ -100,7 +100,7 @@ library(patchwork)
 
 ```{r}
 # loading the image (a screenshot i took)
-image1a <- "~/Desktop/DATA/fig1A.png"
+image1a <- "~/Desktop/img/fig1A.png"
 img <- readPNG(image1a) #reading my image in PNG format and converting it to an array/matrix
 
 xhat <- 0.58   # adjusting for right/left movement of my circle
@@ -210,7 +210,7 @@ grid.arrange(
 <summary>🐋 CLICK HERE To View Figure One from the Paper for a Comparison</summary>
 **Figure 1 (A-C)** As Shown in the Paper
 ```{r}
-paper_fig1 <- "~/Desktop/DATA/fig1paperversion.png"
+paper_fig1 <- "~/Desktop/img/fig1paperversion.png"
 paper_fig1 <- readPNG(paper_fig1) #reading my image in PNG format and converting it to an array/matrix
 grid.raster(paper_fig1)
 ```
@@ -335,7 +335,7 @@ print(HF_b)
 <summary>🐋 CLICK HERE To View Figure Three from the Paper for a Comparison</summary>
 **Figure 3 (A-C)** As Shown in the Paper
 ```{r}
-paper_fig3 <- "~/Desktop/DATA/paperfig3.png"
+paper_fig3 <- "~/Desktop/img/paperfig3.png"
 paper_fig3 <- readPNG(paper_fig3) # reading my image in PNG format and converting it to an array/matrix
 grid.raster(paper_fig3)
 ```
@@ -421,7 +421,7 @@ print(fig_3_1)
 **A Quick Look at the Original Paper's Figure:** 
 ```{r}
 # paper's supplemental figure 3.1:
-paper_plot <- "~/Desktop/DATA/figsup1paper.png"
+paper_plot <- "~/Desktop/img/figsup1paper.png"
 paper_plot <- readPNG(paper_plot) #reading my image in PNG format and converting it to an array/matrix
 grid.raster(paper_plot)
 ```
