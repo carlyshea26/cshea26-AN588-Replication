@@ -333,7 +333,7 @@ print(HF_b)
 
 <details>
 <summary>🐋 CLICK HERE To View Figure Three from the Paper for a Comparison</summary>
-**figure 3 (A-C)** as shown in the paper
+**Figure 3 (A-C)** As Shown in the Paper
 ```{r}
 paper_fig3 <- "~/Desktop/DATA/paperfig3.png"
 paper_fig3 <- readPNG(paper_fig3) # reading my image in PNG format and converting it to an array/matrix
