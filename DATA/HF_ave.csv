@@ -1,0 +1,145 @@
+Region,location,date,year,Ave_PF,SD_PF,Num_note
+Icelandic Waters,Iceland,17/02/2007,2007,130.9734177,1.958525666,79
+Icelandic Waters,Iceland,11/03/2007,2007,131.0233333,2.038784062,90
+Greenland Sea,SE_Greenland,13/10/2007,2007,131.66125,1.283518528,160
+Greenland Sea,SE_Greenland,21/10/2007,2007,130.7238095,2.450286669,21
+Greenland Sea,SE_Greenland,24/10/2007,2007,131.2950617,0.945767048,81
+Greenland Sea,SE_Greenland,31/10/2007,2007,131.2171717,1.241710506,99
+Greenland Sea,SE_Greenland,08/11/2007,2007,130.8742857,1.008123225,140
+Greenland Sea,SE_Greenland,04/12/2007,2007,131.5169903,1.046924728,206
+Greenland Sea,SE_Greenland,12/12/2007,2007,131.4278571,0.945850614,280
+Greenland Sea,SE_Greenland,28/12/2007,2007,131.1571429,0.811487245,168
+Greenland Sea,SE_Greenland,05/01/2008,2008,131.972,1.254830666,25
+Greenland Sea,SE_Greenland,12/01/2008,2008,131.1581395,1.078393698,86
+Greenland Sea,SE_Greenland,17/01/2008,2008,131.588254,1.086023747,315
+Greenland Sea,SE_Greenland,26/01/2008,2008,130.9857143,0.859595317,147
+Greenland Sea,SE_Greenland,02/02/2008,2008,131.0014706,1.298850542,68
+Greenland Sea,SE_Greenland,16/02/2008,2008,131.7128571,1.294796882,70
+Greenland Sea,SE_Greenland,26/02/2008,2008,131.3225806,1.067619155,93
+Greenland Sea,SE_Greenland,03/03/2008,2008,131.5272727,1.116451811,55
+Greenland Sea,SE_Greenland,07/03/2008,2008,131.5576923,0.921812596,26
+Oceanic Northeast Atlantic,Azores,12/10/2008,2008,132.5888889,2.061615,27
+Oceanic Northeast Atlantic,Azores,17/10/2008,2008,130.425,1.743976344,44
+Oceanic Northeast Atlantic,Azores,23/10/2008,2008,129.3133333,1.691519463,15
+Oceanic Northeast Atlantic,Azores,03/11/2008,2008,131.725,1.192206837,36
+Oceanic Northeast Atlantic,Azores,25/11/2008,2008,130.6044118,0.917236899,68
+Oceanic Northeast Atlantic,Azores,29/11/2008,2008,131.4738095,1.406961702,42
+Oceanic Northeast Atlantic,Azores,05/12/2008,2008,130.7972603,0.964505141,73
+Oceanic Northeast Atlantic,Azores,07/12/2008,2008,130.488,0.841288694,25
+Oceanic Northeast Atlantic,Azores,09/12/2008,2008,131.2363636,0.906422272,110
+Oceanic Northeast Atlantic,Azores,16/12/2008,2008,130.948,0.871359092,25
+Oceanic Northeast Atlantic,Azores,02/10/2009,2009,130.875,0.776208735,4
+Oceanic Northeast Atlantic,Azores,04/10/2009,2009,130.3204819,1.126375477,83
+Oceanic Northeast Atlantic,Azores,29/10/2009,2009,131.2902439,0.699215588,41
+Oceanic Northeast Atlantic,Azores,26/10/2010,2010,129.8583333,0.690253052,24
+Oceanic Northeast Atlantic,Azores,30/10/2010,2010,129.0666667,0.752772653,6
+Oceanic Northeast Atlantic,Azores,04/11/2010,2010,129.6142857,0.788573864,35
+Oceanic Northeast Atlantic,Azores,06/11/2010,2010,129.8439024,1.289776876,41
+Oceanic Northeast Atlantic,Azores,21/11/2010,2010,130.4433333,1.217879257,30
+Oceanic Northeast Atlantic,Azores,24/11/2010,2010,129.8454545,1.853883253,22
+Oceanic Northeast Atlantic,Azores,01/12/2010,2010,131.4625,0.871677365,8
+Oceanic Northeast Atlantic,Azores,03/12/2010,2010,132.1090909,3.760971828,11
+Oceanic Northeast Atlantic,Azores,09/12/2010,2010,130.2352941,3.880067844,17
+Oceanic Northeast Atlantic,Azores,14/12/2010,2010,129.79,2.402389162,20
+Oceanic Northeast Atlantic,Azores,17/12/2010,2010,129.8368421,1.382403127,38
+Oceanic Northeast Atlantic,Azores,23/12/2010,2010,130.2961538,1.11477006,78
+Oceanic Northeast Atlantic,Azores,29/12/2010,2010,130.3010101,1.211466892,99
+Oceanic Northeast Atlantic,Azores,03/01/2011,2011,130.15,0.5,4
+Oceanic Northeast Atlantic,Azores,05/01/2011,2011,129.9909091,0.53935989,11
+Oceanic Northeast Atlantic,Azores,07/01/2011,2011,130.9329114,0.953767364,79
+Oceanic Northeast Atlantic,Azores,09/01/2011,2011,130.183871,0.889230669,31
+Oceanic Northeast Atlantic,Azores,11/01/2011,2011,130.1723684,1.115299504,76
+Oceanic Northeast Atlantic,Azores,24/01/2011,2011,129.8,0.875595036,10
+Oceanic Northeast Atlantic,Azores,26/01/2011,2011,129.3916667,1.225085031,12
+Oceanic Northeast Atlantic,Azores,30/01/2011,2011,129.8555556,0.964099154,27
+Oceanic Northeast Atlantic,Azores,11/02/2011,2011,130.1259259,1.122023977,54
+Oceanic Northeast Atlantic,Azores,13/02/2011,2011,129.2444444,1.20115685,9
+Oceanic Northeast Atlantic,Azores,27/10/2011,2011,129.85,1.213303451,20
+Oceanic Northeast Atlantic,Azores,08/11/2011,2011,130.4388889,1.127276201,18
+Oceanic Northeast Atlantic,Azores,20/11/2011,2011,130.2166667,1.000832986,6
+Oceanic Northeast Atlantic,Azores,01/12/2011,2011,130.5354839,3.599032128,31
+Oceanic Northeast Atlantic,Azores,06/12/2011,2011,130.3485714,3.673864084,35
+Oceanic Northeast Atlantic,Azores,12/12/2011,2011,130.85,3.389626579,140
+Oceanic Northeast Atlantic,Azores,16/12/2011,2011,131.4277778,2.983751428,108
+Oceanic Northeast Atlantic,Azores,19/12/2011,2011,129.9463415,3.803688839,41
+Oceanic Northeast Atlantic,Azores,30/12/2011,2011,129.9883721,3.76702156,86
+Oceanic Northeast Atlantic,Azores,03/01/2012,2012,129.7272727,1.143757762,11
+Oceanic Northeast Atlantic,Azores,06/01/2012,2012,129.7731707,1.893412843,41
+Oceanic Northeast Atlantic,Azores,12/01/2012,2012,130.36,0.728795484,15
+Oceanic Northeast Atlantic,Azores,17/01/2012,2012,130.38,1.472563902,10
+Oceanic Northeast Atlantic,Azores,20/01/2012,2012,130.6956522,2.584829564,23
+Oceanic Northeast Atlantic,Azores,01/02/2012,2012,129.83125,0.914125265,16
+Oceanic Northeast Atlantic,Azores,04/02/2012,2012,129.9,1.732050808,3
+Oceanic Northeast Atlantic,Azores,25/02/2012,2012,129.3246575,0.976498965,73
+Oceanic Northeast Atlantic,Azores,03/10/2012,2012,128.8022346,0.765620502,179
+Oceanic Northeast Atlantic,Azores,15/10/2012,2012,129.4972973,1.080248553,37
+Barents Sea,Svalvard,09/10/2014,2014,128.569697,0.847969947,33
+Barents Sea,Svalvard,18/10/2014,2014,129.3756098,0.798054036,41
+Barents Sea,Svalvard,20/10/2014,2014,128.3461538,0.799291184,39
+Celtic Sea,Ireland,06/10/2015,2015,128.3946154,0.781204748,130
+Barents Sea,Svalvard,08/10/2015,2015,128.5153846,1.411173362,13
+Bay of Biscay & Iberian Coast,SW_Portugal,09/10/2015,2015,128.7333333,0.40824829,6
+Bay of Biscay & Iberian Coast,SW_Portugal,12/10/2015,2015,128.0941176,0.782200892,17
+Bay of Biscay & Iberian Coast,SW_Portugal,17/10/2015,2015,129.0818182,0.750757194,11
+Celtic Sea,Ireland,20/10/2015,2015,128.4447059,0.934205275,85
+Bay of Biscay & Iberian Coast,SW_Portugal,24/10/2015,2015,128.9458333,0.985979613,24
+Bay of Biscay & Iberian Coast,SW_Portugal,30/10/2015,2015,128.525,0.744023809,8
+Bay of Biscay & Iberian Coast,SW_Portugal,06/11/2015,2015,129.0624339,0.881498001,189
+Bay of Biscay & Iberian Coast,SW_Portugal,06/12/2015,2015,128.2863636,1.226025501,22
+Bay of Biscay & Iberian Coast,SW_Portugal,09/12/2015,2015,128.5114286,0.957254477,35
+Bay of Biscay & Iberian Coast,SW_Portugal,12/12/2015,2015,128.9623188,1.29831355,69
+Bay of Biscay & Iberian Coast,SW_Portugal,16/12/2015,2015,128.6455882,0.888304409,68
+Bay of Biscay & Iberian Coast,SW_Portugal,18/12/2015,2015,128.4458333,0.607036167,48
+Bay of Biscay & Iberian Coast,SW_Portugal,20/12/2015,2015,129.4,0.577350269,4
+Bay of Biscay & Iberian Coast,SW_Portugal,28/12/2015,2015,128.4,0.707106781,2
+Bay of Biscay & Iberian Coast,SW_Portugal,31/12/2015,2015,128.7571429,0.662993544,14
+Bay of Biscay & Iberian Coast,SW_Portugal,05/01/2016,2016,128.4406061,0.778906126,165
+Bay of Biscay & Iberian Coast,SW_Portugal,10/01/2016,2016,128.3595745,0.856347038,47
+Barents Sea,Svalvard,12/01/2016,2016,127.3384615,0.864692031,39
+Bay of Biscay & Iberian Coast,SW_Portugal,12/01/2016,2016,128.4543478,1.029715499,46
+Bay of Biscay & Iberian Coast,SW_Portugal,14/01/2016,2016,128.1139241,0.957927006,79
+Bay of Biscay & Iberian Coast,SW_Portugal,17/01/2016,2016,128.3543478,1.01973995,46
+Bay of Biscay & Iberian Coast,SW_Portugal,19/01/2016,2016,128.1268293,0.673061806,41
+Bay of Biscay & Iberian Coast,SW_Portugal,21/01/2016,2016,128.15,0.823351065,44
+Bay of Biscay & Iberian Coast,SW_Portugal,24/01/2016,2016,128.8736842,1.102031617,57
+Bay of Biscay & Iberian Coast,SW_Portugal,01/02/2016,2016,128.5428571,0.948461824,35
+Bay of Biscay & Iberian Coast,SW_Portugal,03/02/2016,2016,127.754902,0.849544284,51
+Bay of Biscay & Iberian Coast,SW_Portugal,14/02/2016,2016,128.4454545,0.522232968,11
+Bay of Biscay & Iberian Coast,SW_Portugal,17/02/2016,2016,127.9,1.012422837,29
+Bay of Biscay & Iberian Coast,SW_Portugal,25/02/2016,2016,127.885,1.012175874,20
+Bay of Biscay & Iberian Coast,SW_Portugal,28/02/2016,2016,128.0242424,1.006240001,33
+Bay of Biscay & Iberian Coast,SW_Portugal,04/03/2016,2016,127.8833333,0.828357695,18
+Bay of Biscay & Iberian Coast,SW_Portugal,06/03/2016,2016,128.4127273,0.654911514,55
+Celtic Sea,Ireland,20/03/2016,2016,127.8485714,0.88163332,35
+Celtic Sea,Ireland,04/10/2016,2016,128.1705882,0.907359433,68
+Celtic Sea,Ireland,08/10/2016,2016,127.7558824,0.758863255,34
+Celtic Sea,Ireland,12/10/2016,2016,127.9862069,0.651504951,87
+Celtic Sea,Ireland,18/10/2016,2016,127.9852632,0.737443603,95
+Celtic Sea,Ireland,21/10/2016,2016,128.4454545,0.5958006,22
+Celtic Sea,Ireland,26/10/2016,2016,127.905036,0.722146934,139
+Celtic Sea,Ireland,29/10/2016,2016,126.9421053,0.652025185,76
+Celtic Sea,Ireland,02/11/2016,2016,128.7478873,0.76136328,71
+Oceanic Northeast Atlantic,Azores,25/02/2017,2017,128.3704819,0.992343381,332
+Oceanic Northeast Atlantic,Azores,07/03/2017,2017,127.4682243,1.36164427,107
+Oceanic Northeast Atlantic,Azores,09/03/2017,2017,128.1366071,1.07217011,112
+Oceanic Northeast Atlantic,Azores,12/03/2017,2017,127.8494624,1.231665421,186
+Oceanic Northeast Atlantic,Azores,16/03/2017,2017,128.3234848,1.032735924,132
+Oceanic Northeast Atlantic,Azores,18/03/2017,2017,128.3729358,1.0423085,218
+Oceanic Northeast Atlantic,Azores,26/03/2017,2017,127.684322,1.110744415,236
+Oceanic Northeast Atlantic,Azores,18/12/2017,2017,128.2987179,2.16179901,78
+Oceanic Northeast Atlantic,Azores,26/12/2017,2017,127.6450549,0.995909828,91
+Barents Sea,Norway,02/01/2018,2018,127.0422535,0.910362875,71
+Barents Sea,Norway,09/01/2018,2018,126.9243243,0.626012693,37
+Oceanic Northeast Atlantic,Azores,11/01/2018,2018,127.95,0.985861591,14
+Oceanic Northeast Atlantic,Azores,13/01/2018,2018,126.6517241,0.927600857,29
+Barents Sea,Norway,25/01/2018,2018,127.4178295,1.069349219,129
+Barents Sea,Norway,26/01/2018,2018,128.1543478,1.00790355,46
+Barents Sea,Norway,21/02/2018,2018,127.5410714,0.946721959,56
+Barents Sea,Norway,23/02/2018,2018,127.4305556,1.038639263,72
+Oceanic Northeast Atlantic,Azores,19/03/2019,2019,127.52,0.814269294,30
+Oceanic Northeast Atlantic,Azores,01/01/2020,2020,126.6018182,0.92466028,55
+Oceanic Northeast Atlantic,Azores,24/01/2020,2020,126.8088889,0.674852367,90
+Oceanic Northeast Atlantic,Azores,31/01/2020,2020,126.5835165,0.709501192,91
+Oceanic Northeast Atlantic,Azores,03/02/2020,2020,127.2516129,0.598816036,31
+Oceanic Northeast Atlantic,Azores,05/02/2020,2020,126.8994012,0.794900691,167
+Oceanic Northeast Atlantic,Azores,22/02/2020,2020,126.6675676,0.769940133,37
