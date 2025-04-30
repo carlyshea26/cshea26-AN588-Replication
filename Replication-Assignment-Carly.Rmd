@@ -195,6 +195,7 @@ ini_b_9905 <- ini_b_9905 + theme(plot.title = element_text(size = 18, family = "
         legend.text=element_text(size=10), legend.title=element_blank())
 print(ini_b_9905)
 ```
+
 ### Putting It All Together
 ```{r}
 # arranging figure 1 sections A-C to compare to the actual study's figure 1
@@ -210,7 +211,9 @@ grid.arrange(
 <summary>🐋 CLICK HERE To View Figure One from the Paper for a Comparison</summary>
 **Figure 1 (A-C)** As Shown in the Paper
 ```{r}
-knitr::include_graphics("img/fig1paperversion.png")
+paper_fig1 <- "~/Desktop/img/fig1paperversion.png"
+paper_fig1 <- readPNG(paper_fig1) #reading my image in PNG format and converting it to an array/matrix
+grid.raster(paper_fig1)
 ```
 </details>
 
@@ -333,7 +336,9 @@ print(HF_b)
 <summary>🐋 CLICK HERE To View Figure Three from the Paper for a Comparison</summary>
 **Figure 3 (A-C)** As Shown in the Paper
 ```{r}
-knitr::include_graphics("img/paperfig3.png")
+paper_fig3 <- "~/Desktop/img/paperfig3.png"
+paper_fig3 <- readPNG(paper_fig3) # reading my image in PNG format and converting it to an array/matrix
+grid.raster(paper_fig3)
 ```
 
 </details>
