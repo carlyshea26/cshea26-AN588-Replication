@@ -34,7 +34,7 @@ options(warn=-1)
 ```
 
 <div align="center">
-  <img src= "/Users/carlymcdermott/Desktop/img/finwhale.png" alt="Centered Image" width="500">
+  <img src= "/Users/carlymcdermott/cshea26-AN588-Replication/img/finwhale.png" alt="Centered Image" width="500">
 </div>
 
 
@@ -100,7 +100,7 @@ library(patchwork)
 
 ```{r}
 # loading the image (a screenshot i took)
-image1a <- "~/Desktop/img/fig1A.png"
+image1a <- "~/cshea26-AN588-Replication/img/fig1A.png"
 img <- readPNG(image1a) #reading my image in PNG format and converting it to an array/matrix
 
 xhat <- 0.58   # adjusting for right/left movement of my circle
@@ -125,7 +125,7 @@ print(img1a)
 - this CSV contains all the percentages of each INI (inter-note-interval) type from 1999 to 2005 at the southeast (SE) location of the Oceanic Northeast Atlantic (ONA) region
 ```{r}
 # figure 1B: INI percentage song type in South East location from the ONA region
-perc_SE <- read.csv(file="~/Desktop/DATA/Perc_SE_songs.csv", header=TRUE, dec=".")
+perc_SE <- read.csv(file="~/cshea26-AN588-Replication/DATA/Perc_SE_songs.csv", header=TRUE, dec=".")
 str(perc_SE)
 perc_SE$INI <- factor(perc_SE$INI, levels = c("19s", "Hyb", "12s"))
 
@@ -168,7 +168,7 @@ print(perc) #printing the figure (sanity check)
 - loading CSV File Used for Figure 1C: **INI_ave_see_99_05.csv**
 - this CSV contains all INI's (inter-note-intervals) averaged by song collected from 1999 to 2005 at the SE location of the ONA region
 ```{r}
-bout9905 <- read.csv(file="~/Desktop/DATA/INI_ave_SE_99_05.csv", header=TRUE, dec=".")
+bout9905 <- read.csv(file="~/cshea26-AN588-Replication/DATA/INI_ave_SE_99_05.csv", header=TRUE, dec=".")
 bout9905$date <- as.Date(bout9905$date, format = "%d/%m/%Y")
 str(bout9905$date)  # ensuring we now have the date format
 head(bout9905$date) # printing data to see how it looks 
@@ -210,7 +210,7 @@ grid.arrange(
 <summary>🐋 CLICK HERE To View Figure One from the Paper for a Comparison</summary>
 **Figure 1 (A-C)** As Shown in the Paper
 ```{r}
-paper_fig1 <- "~/Desktop/img/fig1paperversion.png"
+paper_fig1 <- "~/cshea26-AN588-Replication/img/fig1paperversion.png"
 paper_fig1 <- readPNG(paper_fig1) #reading my image in PNG format and converting it to an array/matrix
 grid.raster(paper_fig1)
 ```
@@ -230,7 +230,7 @@ grid.raster(paper_fig1)
 - this CSV contains all contains all INI's (inter-note-intervals) averaged by song collected from 2006 to 2020 and sorted by location, region and year
 ```{r}
 # figure 3A: sorted INI gradient from 2006 to 2020 for all locations and regions
-bout0620 <- read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
+bout0620 <- read.csv(file="~/cshea26-AN588-Replication/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
 bout0620$date <- as.Date(bout0620$date, format = "%d/%m/%Y")
 
 ini_b_0620 <- ggplot(bout0620, aes(x = date, y = Ave_INI, color= Region)) +
@@ -264,7 +264,7 @@ print(ini_b_0620)
 ```{r}
 # figure 3B: gradient of the peak frequency of the 20Hz only for EAR data
 EARs <- subset(bout0620, Location == "Azores" | Location == "Gorringe")
-EARs <- read.csv(file = "~/Desktop/DATA/20Hz_ave_EARs.csv", header = TRUE, dec = ".")
+EARs <- read.csv(file = "~/cshea26-AN588-Replication/DATA/20Hz_ave_EARs.csv", header = TRUE, dec = ".")
 
 EARs$date <- as.Date(EARs$date, format = "%d/%m/%Y")
 
@@ -303,7 +303,7 @@ print(freq20_b_EAR)
 - this CSV contains peak frequencies of the high frequency (HF) note averaged by song (also includes standard deviations sorted by location, region and year). 
 ```{r}
 # figure 3C:
-HF <- read.csv(file="~/Desktop/DATA/HF_ave.csv", header=TRUE, dec=".")
+HF <- read.csv(file="~/cshea26-AN588-Replication/DATA/HF_ave.csv", header=TRUE, dec=".")
 HF$date <- as.Date(HF$date, format = "%d/%m/%Y")
 
 HF_b <- ggplot(HF, aes(x = date, y = Ave_PF, color= Region)) +
@@ -335,7 +335,7 @@ print(HF_b)
 <summary>🐋 CLICK HERE To View Figure Three from the Paper for a Comparison</summary>
 **Figure 3 (A-C)** As Shown in the Paper
 ```{r}
-paper_fig3 <- "~/Desktop/img/paperfig3.png"
+paper_fig3 <- "~/cshea26-AN588-Replication/img/paperfig3.png"
 paper_fig3 <- readPNG(paper_fig3) # reading my image in PNG format and converting it to an array/matrix
 grid.raster(paper_fig3)
 ```
@@ -362,7 +362,7 @@ CSVs Used for Supplemental Figure 1:
 
 fig_3_1 <- par(mfrow = c(3, 3))
 
-INI_lm <- read.csv(file="~/Desktop/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
+INI_lm <- read.csv(file="~/cshea26-AN588-Replication/DATA/INI_ave_06_20.csv", header=TRUE, dec=".")
 LM_ini <- lm(Ave_INI ~ year, data=INI_lm)
 
 # spend x residuals plot
@@ -380,7 +380,7 @@ qqnorm(LM_ini$resid)
 qqline(LM_ini$resid)
 
 # repeating this process for the 20 Hz note frequencies
-EAR <- read.csv(file="~/Desktop/DATA/20Hz_ave_EARs.csv", header=TRUE, dec=".")
+EAR <- read.csv(file="~/cshea26-AN588-Replication/DATA/20Hz_ave_EARs.csv", header=TRUE, dec=".")
 LM_20_EAR <- lm(Ave_PF ~ year, data=EAR)
 summary(LM_20_EAR)
 
@@ -398,7 +398,7 @@ hist(LM_20_EAR$resid, main="Histogram of Residuals", xlab="Residuals",
 qqnorm(LM_20_EAR$resid)
 qqline(LM_20_EAR$resid)
 
-HF_lm <- read.csv(file="~/Desktop/DATA/HF_ave.csv", header=TRUE, dec=".")
+HF_lm <- read.csv(file="~/cshea26-AN588-Replication/DATA/HF_ave.csv", header=TRUE, dec=".")
 HF_LM <- lm(Ave_PF ~ year, data=HF_lm)
 
 plot(HF_LM$resid~HF_lm$Ave_PF[order(HF_lm$Ave_PF)], #originally had this as Ave_peak_frequency - this is not the column title in their CV (CV column= Ave_PF)
@@ -421,7 +421,7 @@ print(fig_3_1)
 **A Quick Look at the Original Paper's Figure:** 
 ```{r}
 # paper's supplemental figure 3.1:
-paper_plot <- "~/Desktop/img/figsup1paper.png"
+paper_plot <- "~/cshea26-AN588-Replication/img/figsup1paper.png"
 paper_plot <- readPNG(paper_plot) #reading my image in PNG format and converting it to an array/matrix
 grid.raster(paper_plot)
 ```
@@ -437,7 +437,7 @@ From how they both compare side by side, my plot vs. the plot featured in the pa
 ```{r}
 # figure 4: histograms of all INI measurements from the same singing season, for the actual individual graphs please click on the drop-down below this chunk!
 
-ini_all<-read.csv(file="~/Desktop/DATA/INI_all.csv", header=TRUE, dec=".")
+ini_all<-read.csv(file="~/cshea26-AN588-Replication/DATA/INI_all.csv", header=TRUE, dec=".")
 
 #2006/2007
 ini0607<-subset(ini_all, year2=="2006/2007")
@@ -579,7 +579,7 @@ ggarrange(ini0607_g, ini0708_g, ini1415_g, ini1516_g, ini1617_g, ini1718_g,
 - this CSV contains all measurements of the higher frequency (HF) note peak frequencies sorted by location, region and year
 ```{r}
 #Fig 4B: histograms of all peak frequencies of the HF note from the same singing season
-hf_all <- read.csv(file="~/Desktop/DATA/HF_all.csv", header=TRUE, dec=".")
+hf_all <- read.csv(file="~/cshea26-AN588-Replication/DATA/HF_all.csv", header=TRUE, dec=".")
 
 #2015/2016
 hf1516 <- subset(hf_all, year2=="2015/2016") #wrong column labeled in original datafile
@@ -657,7 +657,7 @@ Testing OBS (ocean bottom seismometer) vs. EARS (Ecologic Acoustic Recorders):
 library (coin)
 library(rstatix) #loading required packages
 
-test <- read.csv(file="~/Desktop/DATA/test_ear_obs.csv", header=TRUE, dec=".") #loading data
+test <- read.csv(file="~/cshea26-AN588-Replication/DATA/test_ear_obs.csv", header=TRUE, dec=".") #loading data
 median(test$INI_ear) 
 median (test$INI_obs)
 median(test$Peak_freq_ear)
@@ -677,7 +677,7 @@ freq_test
 - this CSV contains all 20-Hz note peak frequency measurements averaged per song (or day) and its standard deviations sorted location, region and year 
 ```{r}
 # averaged peak frequencies of the 20-Hz notes per song (from all data)
-bout99 <- read.csv(file="~/Desktop/DATA/PF_ave_all.csv", header=TRUE, dec=".")
+bout99 <- read.csv(file="~/cshea26-AN588-Replication/DATA/PF_ave_all.csv", header=TRUE, dec=".")
 bout99$date <- as.Date(bout99$date, format = "%d/%m/%Y")
 
 freq20_b <- ggplot(bout99, aes(x = date, y = Ave_PF, color = Region, shape = Recorder)) +
