@@ -34,7 +34,7 @@ options(warn=-1)
 ```
 
 <div align="center">
-  <img src= "/Users/carlymcdermott/cshea26-AN588-Replication/img/finwhale.png" alt="Centered Image" width="500">
+  <img src= "img/finwhale.png" alt="Centered Image" width="500">
 </div>
 
 
@@ -100,19 +100,19 @@ library(patchwork)
 
 ```{r}
 # loading the image (a screenshot i took)
-image1a <- "~/cshea26-AN588-Replication/img/fig1A.png"
-img <- readPNG(image1a) #reading my image in PNG format and converting it to an array/matrix
-
-xhat <- 0.58   # adjusting for right/left movement of my circle
-yhat <- 0.17   # adjusting for up/down movement of my circle
-
-# plotting a red circle to overlay the image to identify the coordinate of interest
-img1a <- ggplot() +
-  annotation_custom(rasterGrob(img, width = unit(1, "npc"), height = unit(1, "npc"))) +
-  geom_point(aes(x = xhat, y = yhat), color = "red", size = 16, shape = 1, stroke = 1.5) +  
-  theme_void() +
-  coord_fixed(xlim = c(0, 1.5), ylim = c(0, 1)) 
-print(img1a)
+ image1a <- "~/Desktop/img/fig1A.png"
+ img <- readPNG(image1a) #reading my image in PNG format and converting it to an array/matrix
+ 
+ xhat <- 0.58   # adjusting for right/left movement of my circle
+ yhat <- 0.17   # adjusting for up/down movement of my circle
+ 
+ # plotting a red circle to overlay the image to identify the coordinate of interest
+ img1a <- ggplot() +
+   annotation_custom(rasterGrob(img, width = unit(1, "npc"), height = unit(1, "npc"))) +
+   geom_point(aes(x = xhat, y = yhat), color = "red", size = 16, shape = 1, stroke = 1.5) +  
+   theme_void() +
+   coord_fixed(xlim = c(0, 1.5), ylim = c(0, 1)) 
+ print(img1a)
 ```
 
 <details>
@@ -210,9 +210,7 @@ grid.arrange(
 <summary>🐋 CLICK HERE To View Figure One from the Paper for a Comparison</summary>
 **Figure 1 (A-C)** As Shown in the Paper
 ```{r}
-paper_fig1 <- "~/cshea26-AN588-Replication/img/fig1paperversion.png"
-paper_fig1 <- readPNG(paper_fig1) #reading my image in PNG format and converting it to an array/matrix
-grid.raster(paper_fig1)
+knitr::include_graphics("img/fig1paperversion.png")
 ```
 </details>
 
@@ -335,10 +333,9 @@ print(HF_b)
 <summary>🐋 CLICK HERE To View Figure Three from the Paper for a Comparison</summary>
 **Figure 3 (A-C)** As Shown in the Paper
 ```{r}
-paper_fig3 <- "~/cshea26-AN588-Replication/img/paperfig3.png"
-paper_fig3 <- readPNG(paper_fig3) # reading my image in PNG format and converting it to an array/matrix
-grid.raster(paper_fig3)
+knitr::include_graphics("img/paperfig3.png")
 ```
+
 </details>
 
 **Comments Regarding Figure 3:** 
@@ -421,9 +418,7 @@ print(fig_3_1)
 **A Quick Look at the Original Paper's Figure:** 
 ```{r}
 # paper's supplemental figure 3.1:
-paper_plot <- "~/cshea26-AN588-Replication/img/figsup1paper.png"
-paper_plot <- readPNG(paper_plot) #reading my image in PNG format and converting it to an array/matrix
-grid.raster(paper_plot)
+knitr::include_graphics("img/figsup1paper.png") #reading my image 
 ```
 
 From how they both compare side by side, my plot vs. the plot featured in the paper appear very similar. I didn't have a lot of issues with this step as it was just a combination of histograms, q-q plots, and regressions.
