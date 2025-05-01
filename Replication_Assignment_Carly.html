@@ -74,7 +74,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#terms-and-abbreviations" id="toc-terms-and-abbreviations" class="nav-link" data-scroll-target="#terms-and-abbreviations">Terms and Abbreviations:</a></li>
+  </ul></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#loading-required-packages" id="toc-loading-required-packages" class="nav-link" data-scroll-target="#loading-required-packages">Loading required packages</a></li>
+  <li><a href="#figure-1" id="toc-figure-1" class="nav-link" data-scroll-target="#figure-1">Figure 1</a>
+  <ul class="collapse">
+  <li><a href="#figure-1a" id="toc-figure-1a" class="nav-link" data-scroll-target="#figure-1a">Figure 1A</a></li>
+  <li><a href="#figure-1b" id="toc-figure-1b" class="nav-link" data-scroll-target="#figure-1b">Figure 1B</a></li>
+  <li><a href="#figure-1c" id="toc-figure-1c" class="nav-link" data-scroll-target="#figure-1c">Figure 1C</a></li>
+  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting It All Together</a></li>
+  </ul></li>
+  <li><a href="#figure-3" id="toc-figure-3" class="nav-link" data-scroll-target="#figure-3">Figure 3</a>
+  <ul class="collapse">
+  <li><a href="#figure-3a" id="toc-figure-3a" class="nav-link" data-scroll-target="#figure-3a">Figure 3A:</a></li>
+  <li><a href="#figure-3b" id="toc-figure-3b" class="nav-link" data-scroll-target="#figure-3b">Figure 3B:</a></li>
+  <li><a href="#figure-3c" id="toc-figure-3c" class="nav-link" data-scroll-target="#figure-3c">Figure 3C:</a></li>
+  </ul></li>
+  <li><a href="#supplemental-figure-1" id="toc-supplemental-figure-1" class="nav-link" data-scroll-target="#supplemental-figure-1">Supplemental Figure 1</a>
+  <ul class="collapse">
+  <li><a href="#linear-models-model-validation" id="toc-linear-models-model-validation" class="nav-link" data-scroll-target="#linear-models-model-validation">Linear Models / Model Validation</a></li>
+  </ul></li>
+  <li><a href="#figure-4" id="toc-figure-4" class="nav-link" data-scroll-target="#figure-4">Figure 4</a>
+  <ul class="collapse">
+  <li><a href="#combining-all-histograms-together-in-single-plot" id="toc-combining-all-histograms-together-in-single-plot" class="nav-link" data-scroll-target="#combining-all-histograms-together-in-single-plot">Combining All Histograms Together In Single Plot</a></li>
+  </ul></li>
+  <li><a href="#wilcox-pairwise-comparisons" id="toc-wilcox-pairwise-comparisons" class="nav-link" data-scroll-target="#wilcox-pairwise-comparisons">Wilcox Pairwise Comparisons</a></li>
+  <li><a href="#supplemental-figure-2" id="toc-supplemental-figure-2" class="nav-link" data-scroll-target="#supplemental-figure-2">Supplemental Figure 2</a></li>
+  </ul></li>
+  <li><a href="#resultsconclusions" id="toc-resultsconclusions" class="nav-link" data-scroll-target="#resultsconclusions">Results/Conclusions</a></li>
+  <li><a href="#my-takeaways" id="toc-my-takeaways" class="nav-link" data-scroll-target="#my-takeaways">My Takeaways</a></li>
+  </ul>
+</nav>
+</div>
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
 <main class="content" id="quarto-document-content">
@@ -103,45 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction">Introduction</a>
-  <ul>
-  <li><a href="#terms-and-abbreviations" id="toc-terms-and-abbreviations">Terms and Abbreviations:</a></li>
-  </ul></li>
-  <li><a href="#methods" id="toc-methods">Methods</a>
-  <ul>
-  <li><a href="#loading-required-packages" id="toc-loading-required-packages">Loading required packages</a></li>
-  <li><a href="#figure-1" id="toc-figure-1">Figure 1</a>
-  <ul>
-  <li><a href="#figure-1a" id="toc-figure-1a">Figure 1A</a></li>
-  <li><a href="#figure-1b" id="toc-figure-1b">Figure 1B</a></li>
-  <li><a href="#figure-1c" id="toc-figure-1c">Figure 1C</a></li>
-  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together">Putting It All Together</a></li>
-  </ul></li>
-  <li><a href="#figure-3" id="toc-figure-3">Figure 3</a>
-  <ul>
-  <li><a href="#figure-3a" id="toc-figure-3a">Figure 3A:</a></li>
-  <li><a href="#figure-3b" id="toc-figure-3b">Figure 3B:</a></li>
-  <li><a href="#figure-3c" id="toc-figure-3c">Figure 3C:</a></li>
-  </ul></li>
-  <li><a href="#supplemental-figure-1" id="toc-supplemental-figure-1">Supplemental Figure 1</a>
-  <ul>
-  <li><a href="#linear-models-model-validation" id="toc-linear-models-model-validation">Linear Models / Model Validation</a></li>
-  </ul></li>
-  <li><a href="#figure-4" id="toc-figure-4">Figure 4</a>
-  <ul>
-  <li><a href="#combining-all-histograms-together-in-single-plot" id="toc-combining-all-histograms-together-in-single-plot">Combining All Histograms Together In Single Plot</a></li>
-  </ul></li>
-  <li><a href="#wilcox-pairwise-comparisons" id="toc-wilcox-pairwise-comparisons">Wilcox Pairwise Comparisons</a></li>
-  <li><a href="#supplemental-figure-2" id="toc-supplemental-figure-2">Supplemental Figure 2</a></li>
-  </ul></li>
-  <li><a href="#resultsconclusions" id="toc-resultsconclusions">Results/Conclusions</a></li>
-  <li><a href="#my-takeaways" id="toc-my-takeaways">My Takeaways</a></li>
-  </ul>
-</nav>
+
 <style>
 summary {
   background-color: #007BFF;
@@ -577,7 +580,7 @@ body {
 <section id="linear-models-model-validation" class="level3">
 <h3 class="anchored" data-anchor-id="linear-models-model-validation">Linear Models / Model Validation</h3>
 <ul>
-<li>I went though and performed a really simple linear regression using the lm() function</li>
+<li>I went though and performed a really simple linear regression using the lm() function.</li>
 </ul>
 <p>CSVs Used for Supplemental Figure 1:</p>
 <ul>

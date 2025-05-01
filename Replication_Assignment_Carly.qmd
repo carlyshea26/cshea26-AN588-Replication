@@ -5,7 +5,7 @@ format:
   html:
     theme: journal
     toc: true
-    toc-location: body
+    toc-location: left
 ---
 
 ```{=html}
@@ -382,7 +382,7 @@ print(HF_b)
 
 ### Linear Models / Model Validation
 
--   I went though and performed a really simple linear regression using the lm() function
+-   I went though and performed a really simple linear regression using the lm() function.
 
 CSVs Used for Supplemental Figure 1:
 
