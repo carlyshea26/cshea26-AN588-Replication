@@ -60,8 +60,6 @@ Fin whales are one of the many species that produce songs, which are commonly us
 
 -   **EAR (Ecological Acoustic Recorder):** A type of autonomous underwater recorder.
 
-<!-- -->
-
 -   **OBS (Ocean Bottom Seismometer):** A device on the seafloor capable of capturing acoustic information.
 
 -   **ONA (Oceanic Northeast Atlantic):** A region encompassing several recording locations in the study.​
