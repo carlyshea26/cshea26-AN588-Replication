@@ -80,34 +80,13 @@ suppressPackageStartupMessages({ #ignore this initial function (performing this 
   library(tibble)
   library(ggpubr)
   library(gridExtra)
-  library(FSA)
-  library(ggthemes)
-  if (!require("gplots", quietly = TRUE)) {
-    install.packages("gplots", dependencies = TRUE)
-  }
-  library(gplots)
-  if (!require("RColorBrewer", quietly = TRUE)) {
-    install.packages("RColorBrewer", dependencies = TRUE)
-  }
+  library(patchwork)
   library(RColorBrewer)
-  library(dendextend)
   library(grid)
-  library(gtable)
   library(ggprism)
-  library(ggimage)
   library(png)
   library(curl)
 })
-```
-
-Special Case for "gganimate": (according to research team)
-
-```{r}
-# in order to install this final package, it's dependent on already having the packages "ggplot2", "gifski", and "transformr" installed
-library(gifski)
-library(transformr)
-library(gganimate)
-library(patchwork)
 ```
 
 ## Figure 1
