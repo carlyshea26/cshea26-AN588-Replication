@@ -739,7 +739,7 @@ freq20_b <- ggplot(bout99, aes(x = date, y = Ave_PF, color = Region, shape = Rec
 print(freq20_b)
 ```
 
-# Results/Conclusions
+# Results/Conclusion
 
 In the first decade following initial data collection, researchers observed gradual shifts in inter-note intervals (INIs) and peak frequencies of both the 20-Hz and HF notes, indicating continued song evolution. In short, the key takeaway from this paper is that the combination of both gradual and rapid changes in song parameters across the central and eastern North Atlantic provides compelling evidence for vocal learning in fin whales!
 
